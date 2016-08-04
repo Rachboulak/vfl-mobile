@@ -1,7 +1,11 @@
 {
-    "title" : "POC VFL Mobile",  
-    "login": {    
+    "title": "POC VFL Mobile",
+    "login": {
         "user": "User",
-        "signIn": "Sign In"
+        "signIn": "Log In",
+        "register": "Register Device",
+        "username": "Username",
+        "password": "Password",
+        "failure":"ffffffffffffffffff"
     }
 }
