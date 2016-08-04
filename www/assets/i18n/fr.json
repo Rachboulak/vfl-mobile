@@ -1,0 +1,7 @@
+{
+    "title" : "POC VFL Mobile",  
+    "login": {
+        "user": "Utilisateur",
+        "signIn": "Se connecter"
+    }
+}
