@@ -23,7 +23,7 @@ export class LoginPage {
       var user=new User(this.username,this.password);
       console.log(user);
       this.loginservice.dologin(user,this.nav);
-      //this.nav.push(HomePage,{user: user});
+     // this.nav.push(HomePage,{user: user});
      
   }
 

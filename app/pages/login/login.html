@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar hideBackButton>
     <ion-title>login</ion-title>
   </ion-navbar>
 
@@ -16,9 +16,9 @@
 <ion-content padding>
 
   <ion-card>
-    <ion-card-header>
-      {{ "login.register" | translate }}
-      
+    <ion-card-header style="color:#417dd4;">
+      <b>{{ "login.register" | translate }}
+      </b>
     </ion-card-header>
 
     <ion-list>
@@ -36,8 +36,7 @@
     </ion-list>
     
     <ion-card-footer>
-      <div class="spacer" style="height: 10px;"></div>
-      <button full (click)="doLogin();"><ion-icon name="log-in"></ion-icon>{{ "login.signIn" | translate }}</button>
+      <button clear primary (click)="doLogin();" style="margin-left:10%"><ion-icon name="log-in"></ion-icon>{{ "login.signIn" | translate }}</button>
     </ion-card-footer>
 
   </ion-card>
