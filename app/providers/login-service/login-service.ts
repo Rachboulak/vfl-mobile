@@ -3,6 +3,7 @@ import {Platform, Alert} from 'ionic-angular';
 import {SQLite} from 'ionic-native';
 import {LoginPage} from '../../pages/login/login';
 import {HomePage} from '../../pages/home/home';
+import {MenuPage} from '../../pages/menu/menu';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -29,7 +30,7 @@ export class LoginService {
   public dologin(user, nav) {
     this.database.executeSql("Select * from users where username=? and password=?", [user.username, user.password]).then((data) => {
       if (data.rows.length > 0) {
-        nav.push(HomePage);
+        nav.push(HomePage,{user: user});
       }
       else {
         this.doAlert(nav, "Login failed", "Wrong username or Password");

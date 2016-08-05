@@ -22,7 +22,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
-<<<<<<< HEAD
+
       //Sqlite initialisation
       let db = new SQLite();
       db.openDatabase({
@@ -43,9 +43,7 @@ export class MyApp {
         console.error("Unable to open database", error);
       });
       //i18n
-=======
-      //i18n      
->>>>>>> 28c43e8adda62e0772eef41ce6637a814b3a15ab
+
       this.translateConfig();
     });
   }
