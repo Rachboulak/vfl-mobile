@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController,Alert } from 'ionic-angular';
 import {HomePage} from '../home/home';
 import {MenuPage} from '../menu/menu';
 import {User} from '../../model/user';
@@ -22,9 +22,26 @@ export class LoginPage {
   doLogin(){
       var user=new User(this.username,this.password);
       console.log(user);
-      this.loginservice.dologin(user,this.nav);
+      this.loginservice.dologin(user,(data) => {
+                if (data.rows.length > 0) {
+                    this.nav.push(HomePage, { user: user });
+                }
+                else {
+                    this.doAlert(this.nav, "Login failed", "Wrong username or Password");
+                }
+            }, (error) => {
+                console.log(error);
+                this.doAlert(this.nav, "Error", "Can't connect to database");
+            });
      // this.nav.push(HomePage,{user: user});
      
   }
-
+doAlert(nav, title, message) {
+    let alert = Alert.create({
+      title: title,
+      subTitle: message,
+      buttons: ['Ok']
+    });
+    nav.present(alert);
+  }
 }

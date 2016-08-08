@@ -11,63 +11,41 @@
     <ion-icon name="person"></ion-icon>
     {{user.username}}
   </div>
-  <ion-img src="../../assets/img/fonts-header.png" width="100%" height="auto"></ion-img>
+  <ion-img src="img/fonts-header.png" width="100%" height="auto"></ion-img>
 </ion-header>
 
 
-<ion-content padding class="page1">
-
-  <center>
-    <button large clear primary (click)="goToReportPage()">
+<ion-content padding>
+<ion-list>
+<ion-item>
+<button  full clear primary (click)="goToAccountPage()">
     <div>
-   <ion-icon name="list-box" style="font-size: 30px;"></ion-icon>
-   <br/>
-  <label style="font-size: 10px;"> Rapport</label>
+   <ion-icon name="settings"></ion-icon>
+   
+  <label > My Account</label>
     </div>
  </button>
-    <button large clear primary (click)="goToAccountPage()">
+</ion-item>
+<ion-item>
+<button  clear full  primary (click)="goToReportPage()">
     <div>
-   <ion-icon name="settings" style="font-size: 30px;"></ion-icon>
-   <br/>
-  <label style="font-size: 10px;"> Profile</label>
+   <ion-icon name="paper"></ion-icon>
+   
+  <label>Write a Rapport</label>
     </div>
  </button>
-  </center>
- <div class="spacer" style="height: 30px;"></div>
-  <ion-card>
-    <ion-card-header style="color:#417dd4;">
-     <center><b> Visualiser un rapport de visite
-     </b></center>
-    </ion-card-header>
+</ion-item>
+<ion-item>
+<button  clear full  primary (click)="goToSearchPage()">
+    <div>
+   <ion-icon name="search"></ion-icon>
+   
+  <label>Visualiser un rapport</label>
+    </div>
+ </button>
+</ion-item>
 
-    <ion-list>
-      <ion-item>
-        <ion-label primary>Ligne Produit</ion-label>
-        <ion-select [(ngModel)]="line">
-          <ion-option value="nes">Ligne1</ion-option>
-          <ion-option value="n64">Ligne2</ion-option>
-          <ion-option value="ps">Ligne3</ion-option>
-          <ion-option value="genesis">Ligne4</ion-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item>
-        <ion-label primary>Agence/Secteur/Usine</ion-label>
-        <ion-select [(ngModel)]="agence">
-          <ion-option value="nes">Agence1</ion-option>
-          <ion-option value="n64">Usine1</ion-option>
-          <ion-option value="ps">Secteur1</ion-option>
-          <ion-option value="genesis">Secteur2</ion-option>
-        </ion-select>
-      </ion-item>
-      
-
-    </ion-list>
-
-  <ion-card-footer>
-    <center>  <button clear (click)="goToSearchPage();" ><ion-icon name="search"></ion-icon>Search</button>
-    </center></ion-card-footer>
-
-  </ion-card>
+</ion-list>
+  
 
 </ion-content>

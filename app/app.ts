@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Platform, ionicBootstrap} from 'ionic-angular';
+import {Platform, ionicBootstrap,SqlStorage, Storage} from 'ionic-angular';
 import {StatusBar, SQLite} from 'ionic-native';
 import {HomePage} from './pages/home/home';
 
@@ -15,7 +15,11 @@ import {LoginService} from './providers/login-service/login-service';
   pipes: [TranslatePipe]
 })
 export class MyApp {
+
   rootPage: any = LoginPage;
+
+  private storage: Storage;
+  private database:SQLite;
 
   constructor(platform: Platform, private translate: TranslateService) {
     platform.ready().then(() => {
@@ -23,15 +27,28 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
 
-      //Sqlite initialisation
-      let db = new SQLite();
-      db.openDatabase({
+      //database initialisation
+      if(platform.is('core')){
+        //local storage
+        this.useLocalStorage();
+      }
+      else{//sqlite
+         this.useSqlite();
+      }
+      
+      //i18n
+      this.translateConfig();
+    });
+  }
+useSqlite(){
+  this.database = new SQLite();
+      this.database.openDatabase({
         name: "data.db",
         location: "default"
       }).then(() => {
-        db.executeSql("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)", {}).then((data) => {
+        this.database.executeSql("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)", {}).then((data) => {
           console.error("TABLE CREATED");
-          db.executeSql("INSERT INTO users (username, password) VALUES ('admin', '123')", []).then((data) => {
+          this.database.executeSql("INSERT INTO users (username, password) VALUES ('admin', '123')", []).then((data) => {
             console.error("INSERTED: " + JSON.stringify(data));
           }, (error) => {
             console.error("ERROR: " + JSON.stringify(error.err));
@@ -42,12 +59,15 @@ export class MyApp {
       }, (error) => {
         console.error("Unable to open database", error);
       });
-      //i18n
-
-      this.translateConfig();
-    });
-  }
-
+}
+useLocalStorage(){
+this.storage = new Storage(SqlStorage);
+      this.storage.query("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)");
+       this.storage.query("INSERT INTO users (username, password) VALUES (?, ?)", ["admin2", "123"]).then((data) => {           
+        }, (error) => {
+            console.log(error);
+        }); 
+}
   translateConfig() {
 
     var userLang = navigator.language.split('-')[0]; // use navigator lang if available
