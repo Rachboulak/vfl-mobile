@@ -1,0 +1,50 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Visualiser un rapport</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-list>
+      <ion-item>
+        <ion-label primary>Ligne Produit</ion-label>
+        <ion-select [(ngModel)]="line">
+          <ion-option value="nes">Ligne1</ion-option>
+          <ion-option value="n64">Ligne2</ion-option>
+          <ion-option value="ps">Ligne3</ion-option>
+          <ion-option value="genesis">Ligne4</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label primary>Agence/Secteur/Usine</ion-label>
+        <ion-select [(ngModel)]="agence">
+          <ion-option value="nes">Agence1</ion-option>
+          <ion-option value="n64">Usine1</ion-option>
+          <ion-option value="ps">Secteur1</ion-option>
+          <ion-option value="genesis">Secteur2</ion-option>
+        </ion-select>
+      </ion-item>
+      
+
+    </ion-list>
+
+  <ion-card-footer>
+    <center>  <button clear ><ion-icon name="search"></ion-icon>Search</button>
+    </center></ion-card-footer>
+
+  </ion-card>
+<ion-list>
+   <ion-list-header>
+    Results
+   </ion-list-header>
+  <ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+    {{item}}
+  </ion-item>
+</ion-list>
+</ion-content>
