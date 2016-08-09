@@ -14,31 +14,40 @@
 
 
 <ion-content padding>
+ 
+ <ion-list>
+    <div class="logo">
+      <img src="img/logo.png">
+    </div>
 
-  <ion-card>
-    <ion-card-header style="color:#417dd4;">
-      <b>{{ "login.register" | translate }}
-      </b>
-    </ion-card-header>
-
-    <ion-list>
+    <form #loginForm="ngForm" novalidate>
       <ion-item>
-        <ion-label primary>
-          <ion-icon name="person"></ion-icon> {{ "login.username" | translate }}</ion-label>
-        <ion-input [(ngModel)]="username" placeholder=""></ion-input>
+        <ion-label floating primary><ion-icon name="person"></ion-icon> {{ "login.username" | translate }}</ion-label>
+        <ion-input [(ngModel)]="login.username" ngControl="username" type="text" #username="ngForm" spellcheck="false" autocapitalize="off" required>
+        </ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label primary>
-          <ion-icon name="lock"></ion-icon> {{ "login.password" | translate }}</ion-label>
-        <ion-input type="password" placeholder="" [(ngModel)]="password"></ion-input>
-      </ion-item>
-      
-    </ion-list>
-    
-    <ion-card-footer>
-      <button clear primary (click)="doLogin();" style="margin-left:10%"><ion-icon name="log-in"></ion-icon>{{ "login.signIn" | translate }}</button>
-    </ion-card-footer>
+      <p [hidden]="username.valid || submitted == false" danger padding-left>
+        Username is required
+      </p>
 
-  </ion-card>
+      <ion-item>
+        <ion-label floating primary><ion-icon name="lock"></ion-icon> {{ "login.password" | translate }}</ion-label>
+        <ion-input [(ngModel)]="login.password" ngControl="password" type="password" #password="ngForm" required>
+        </ion-input>
+      </ion-item>
+      <p [hidden]="password.valid || submitted == false" danger padding-left>
+        Password is required
+      </p>
+
+      <ion-row responsive-sm>
+        <ion-col>
+          <button (click)="onLogin(loginForm)" type="submit" primary block><ion-icon name="log-in"></ion-icon>{{ "login.signIn" | translate }}</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
+
+
+
 
 </ion-content>

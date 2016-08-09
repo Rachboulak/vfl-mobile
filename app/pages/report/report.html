@@ -1,9 +1,3 @@
-<!--
-  Generated template for the ReportPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -14,5 +8,64 @@
 
 
 <ion-content padding>
+  <ion-list>
+
+    <form #reportForm="ngForm" novalidate>
+      <ion-item>
+        <ion-label primary> Ligne Produit</ion-label>
+        <ion-select [(ngModel)]="report.line" ngControl="line" #line="ngForm" required>
+          <ion-option value="nes">Ligne1</ion-option>
+          <ion-option value="n64">Ligne2</ion-option>
+          <ion-option value="ps">Ligne3</ion-option>
+          <ion-option value="genesis">Ligne4</ion-option>
+        </ion-select>
+      </ion-item>
+      <p [hidden]="line.valid || submitted == false" danger padding-left>
+        line is required
+      </p>
+
+      <ion-item>
+        <ion-label primary> Agence/Secteur/Usine</ion-label>
+        <ion-select [(ngModel)]="report.agence" ngControl="agence" #agence="ngForm" required>
+          <ion-option value="a1">Agence1</ion-option>
+          <ion-option value="a2">Usine1</ion-option>
+          <ion-option value="a3">Secteur1</ion-option>
+          <ion-option value="a4">Secteur2</ion-option>
+        </ion-select>
+      </ion-item>
+      <p [hidden]="agence.valid || submitted == false" danger padding-left>
+        Agence/Secteur/Usine is required
+      </p>
+
+
+      <ion-item>
+        <ion-label primary> Site</ion-label>
+        <ion-select [(ngModel)]="report.site" ngControl="site" #site="ngForm" required>
+          <ion-option value="a1">Site1</ion-option>
+          <ion-option value="a2">Site2</ion-option>
+          <ion-option value="a3">Site3</ion-option>
+          <ion-option value="a4">Site4</ion-option>
+        </ion-select>
+      </ion-item>
+      <p [hidden]="site.valid || submitted == false" danger padding-left>
+        Site is required
+      </p>
+
+      <ion-row responsive-sm>
+        <ion-col>
+          <button (click)="addVFL(reportForm)" type="submit" primary block>Créer VFL</button>
+        </ion-col>
+        <ion-col>
+          <button (click)="addPASA(reportForm)" type="submit" primary block>Créer PA-SA</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
+
+
+
+
+
+
 
 </ion-content>

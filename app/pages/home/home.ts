@@ -5,6 +5,7 @@ import {LoginPage} from '../login/login';
 import {SearchPage} from "../search/search";
 import {ProfilePage} from "../profile/profile";
 import {ReportPage} from "../report/report";
+import {LoginService} from '../../providers/login-service/login-service';
 
 @Component({
   templateUrl: 'build/pages/home/home.html',
@@ -12,14 +13,14 @@ import {ReportPage} from "../report/report";
 })
 export class HomePage {
   public user;
-  constructor(private navCtrl: NavController, private translate: TranslateService, private platform: Platform,private navparams:NavParams) {
+  constructor(private navCtrl: NavController, private translate: TranslateService, private platform: Platform,private navparams:NavParams,private loginservice:LoginService) {
     this.user=this.navparams.get("user");
     
   }
 
   doLogout() {
-    //this.loginservice.dologin(user,this.nav);
-    this.navCtrl.push(LoginPage);
+    this.loginservice.logout();
+    //this.navCtrl.push(LoginPage)
 
   }
   goToReportPage() {
@@ -29,7 +30,7 @@ export class HomePage {
   }
   goToAccountPage() {
     //this.loginservice.dologin(user,this.nav);
-    this.navCtrl.push(ProfilePage);
+    this.navCtrl.push(ProfilePage,{user:this.user});
 
   }
   goToSearchPage() {

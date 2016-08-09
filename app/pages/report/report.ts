@@ -1,19 +1,30 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import {TranslatePipe, TranslateService, Parser} from "ng2-translate/ng2-translate";
+import {MenuPage} from '../menu/menu';
 
-/*
-  Generated class for the ReportPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   templateUrl: 'build/pages/report/report.html',
+  pipes: [TranslatePipe],
 })
 export class ReportPage {
 
-  constructor(private nav: NavController) {
+submitted = false;
+    report: { line?: string, agency?: string, site?: string } = {};
+  constructor(private nav: NavController, private translate: TranslateService) {
 
   }
+  addVFL(form){
+ this.submitted = true;
+ if (form.valid) {
+  this.nav.push(MenuPage, { report: this.report });
+  }
+  }
 
+addPASA(form){
+ this.submitted = true;
+ if (form.valid) {
+  this.nav.push(MenuPage, { report: this.report });
+  }
+  }
 }

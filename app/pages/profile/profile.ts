@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController,NavParams } from 'ionic-angular';
 
 /*
   Generated class for the ProfilePage page.
@@ -11,9 +11,11 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'build/pages/profile/profile.html',
 })
 export class ProfilePage {
-
-  constructor(private nav: NavController) {
-
+  public user;
+  constructor(private nav: NavController,private navparams:NavParams) {
+    
+    this.user=this.navparams.get("user");
+    console.log(this.user);
   }
 
 }

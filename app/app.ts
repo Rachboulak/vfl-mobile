@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Platform, ionicBootstrap,SqlStorage, Storage} from 'ionic-angular';
+import {Platform, ionicBootstrap,SqlStorage, Storage,Events} from 'ionic-angular';
 import {StatusBar, SQLite} from 'ionic-native';
 import {HomePage} from './pages/home/home';
 
@@ -16,29 +16,26 @@ import {LoginService} from './providers/login-service/login-service';
 })
 export class MyApp {
 
-  rootPage: any = LoginPage;
+  rootPage: any=LoginPage ;
 
   private storage: Storage;
   private database:SQLite;
 
-  constructor(platform: Platform, private translate: TranslateService) {
+  constructor(private events: Events,platform: Platform, private translate: TranslateService,private loginservice:LoginService) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
-
+     
+    
       //database initialisation
       if(platform.is('core')){
-        //local storage
         this.useLocalStorage();
-      }
-      else{//sqlite
+      }else{
          this.useSqlite();
-      }
-      
+      }    
       //i18n
       this.translateConfig();
     });
+    
   }
 useSqlite(){
   this.database = new SQLite();
@@ -63,7 +60,7 @@ useSqlite(){
 useLocalStorage(){
 this.storage = new Storage(SqlStorage);
       this.storage.query("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)");
-       this.storage.query("INSERT INTO users (username, password) VALUES (?, ?)", ["admin2", "123"]).then((data) => {           
+       this.storage.query("INSERT INTO users (username, password) VALUES (?, ?)", ["admin", "123"]).then((data) => {           
         }, (error) => {
             console.log(error);
         }); 

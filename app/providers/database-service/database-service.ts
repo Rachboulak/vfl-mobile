@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Platform, Alert,SqlStorage, Storage} from 'ionic-angular';
+import {Platform, Alert,SqlStorage, Storage,Events} from 'ionic-angular';
 import {SQLite} from 'ionic-native';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -12,7 +12,7 @@ private storage: Storage;
   private database:SQLite;
   private devMode;
 
-   public constructor(protected http: Http, protected platform: Platform) {
+   public constructor(protected http: Http, protected platform: Platform,protected events:Events ) {
     //initialisation database
     if(platform.is('core')){
         //local storage
