@@ -25,7 +25,7 @@ export class LoginPage {
         if (form.valid) {
             this.loginservice.dologin(user, (data) => {
                 if (data.rows.length > 0) {
-                    this.nav.push(HomePage, { user: user });
+                    this.nav.push(HomePage, { user: data.rows.item(0) });
                 }
                 else {
                     this.doAlert(this.nav, "Login failed", "Wrong username or Password");

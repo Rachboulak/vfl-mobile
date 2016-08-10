@@ -10,14 +10,45 @@
 <ion-content padding>
   <div padding-top text-center *ngIf="user.username">
     <img src="http://www.gravatar.com/avatar?d=mm&s=140">
-    <h2>{{user.username}}</h2>
+    <h2>{{user.firstname}} {{user.lastname}}</h2>
 
     <ion-list inset>
-      <p ion-item> bonjour</p>
-      <button ion-item (click)="updatePicture()">Update Picture</button>
-      <button ion-item (click)="changeUsername()">Change Username</button>
-      <button ion-item (click)="changePassword()">Change Password</button>
-      <button ion-item (click)="logout()">Logout</button>
+      <button ion-item>
+        <table  style="width:100%">
+          <tr>
+            <td style="width:50%">Username</td>
+            <td style="color:#666666;">{{user.username}}</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table  style="width:100%">
+          <tr>
+            <td style="width:50%">Ligne de Produit</td>
+            <td style="color:#666666;">ligne1</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Echanges en 2016</td>
+            <td style="color:#666666;">0</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table style="width:100%" >
+          <tr>
+            <td style="width:50%">Dernière visit</td>
+            <td style="color:#666666;">Aucun rapport</td>
+          </tr>
+        </table>
+      </button>
+
     </ion-list>
   </div>
 </ion-content>

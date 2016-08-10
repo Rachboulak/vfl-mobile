@@ -1,0 +1,77 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>create-pspa</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+<ion-list>
+
+
+    <form #pspaForm="ngForm" novalidate>
+      <ion-item>
+        <ion-label primary>Site</ion-label>
+        <ion-input [(ngModel)]="pspa.site" ngControl="site" type="text" #site="ngForm" readonly>
+        </ion-input>
+      </ion-item>
+      
+
+      <ion-item>
+        <ion-label primary> Autheur</ion-label>
+        <ion-input [(ngModel)]="pspa.author" ngControl="author" type="text" readonly>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label primary>Date</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="pspa.date" ngControl="date" #date="ngForm" required></ion-datetime>
+      </ion-item>
+      <p [hidden]="date.valid || submitted == false" danger padding-left>
+        Date is required
+      </p>
+
+
+       <ion-item>
+        <ion-label primary>Evénement remonté par:</ion-label>
+        <ion-input [(ngModel)]="pspa.remontedBy" ngControl="remontedBy" type="text" #remontedBy="ngForm" spellcheck="false" autocapitalize="off" required>
+        </ion-input>
+
+      </ion-item>
+      <p [hidden]="remontedBy.valid || submitted == false" danger padding-left>
+        Date is required
+      </p>
+
+      <ion-item>
+        <ion-label primary> Fonction</ion-label>
+        <ion-select [(ngModel)]="pspa.fonction" ngControl="fonction" #fonction="ngForm" required>
+            <ion-option *ngFor="let item of fonctions" [value] = "item.value" [checked]="false">{{item.title}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <p [hidden]="fonction.valid || submitted == false" danger padding-left>
+        Fonction is required
+      </p>
+
+      <ion-item>
+        <ion-label primary> Status de la personne</ion-label>
+        <ion-select [(ngModel)]="pspa.status" ngControl="status" #status="ngForm" required>
+          <ion-option *ngFor="let item of statues" [value] = "item.value" [checked]="false">{{item.title}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <p [hidden]="status.valid || submitted == false" danger padding-left>
+       Status is required
+      </p>
+
+
+      <ion-row responsive-sm>
+        <ion-col>
+          <button (click)="nextStep(pspaForm)" type="submit" primary block><ion-icon name="arrow-forward"></ion-icon></button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
+
+</ion-content>

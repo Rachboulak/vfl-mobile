@@ -3,11 +3,11 @@ import {Platform, Alert, SqlStorage, Storage, LocalStorage} from 'ionic-angular'
 import {SQLite} from 'ionic-native';
 import {DatabaseService} from '../database-service/database-service';
 import {LoginPage} from '../../pages/login/login';
-import {HomePage} from '../../pages/home/home';
+
 import {MenuPage} from '../../pages/menu/menu';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-
+import { Observable } from 'rxjs/Rx';
 
 
 export class LoginService extends DatabaseService {
@@ -29,11 +29,24 @@ export class LoginService extends DatabaseService {
                 isError(error);
             });
     }
-    
+    getUser(isSuccess, isError){
+        this.localStorage.get('username').then((username)=>{
+            this.executeQuery("Select * from users where username=?",[username],
+            (data) => {
+                isSuccess(data);
+                
+            }, (error) => {
+                isError(error);
+            });
+
+        })
+    }
+   
     logout() {
         this.localStorage.remove(this.HAS_LOGGED_IN);
         this.localStorage.remove('username');
         this.events.publish('user:logout');
+        this.storage.clear();
     }
 
     setUsername(username) {

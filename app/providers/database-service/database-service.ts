@@ -8,9 +8,9 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DatabaseService  {
 
-private storage: Storage;
-  private database:SQLite;
-  private devMode;
+protected storage: Storage;
+  protected database:SQLite;
+  protected devMode;
 
    public constructor(protected http: Http, protected platform: Platform,protected events:Events ) {
     //initialisation database
@@ -52,6 +52,14 @@ private storage: Storage;
     }, (error) => {
       isError(error);
     });
+    }
+  }
+    executePromiseQuery(query,params){
+    if(this.devMode){
+     return this.storage.query(query,params);
+    }
+    else{
+  return this.database.executeSql(query, params);
     }
   }
 }

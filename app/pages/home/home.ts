@@ -15,22 +15,26 @@ export class HomePage {
   public user;
   constructor(private navCtrl: NavController, private translate: TranslateService, private platform: Platform,private navparams:NavParams,private loginservice:LoginService) {
     this.user=this.navparams.get("user");
-    
+
   }
 
   doLogout() {
     this.loginservice.logout();
-    //this.navCtrl.push(LoginPage)
+    this.navCtrl.push(LoginPage)
 
   }
   goToReportPage() {
     //this.loginservice.dologin(user,this.nav);
-    this.navCtrl.push(ReportPage);
+    this.navCtrl.push(ReportPage,{user:this.user});
 
   }
   goToAccountPage() {
-    //this.loginservice.dologin(user,this.nav);
-    this.navCtrl.push(ProfilePage,{user:this.user});
+    this.loginservice.getUser( (data) => {      
+                    this.navCtrl.push(ProfilePage,{user:data.rows.item(0)});
+            }, (error) => { console.log(error);
+              
+            });
+    
 
   }
   goToSearchPage() {

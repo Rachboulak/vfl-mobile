@@ -43,9 +43,9 @@ useSqlite(){
         name: "data.db",
         location: "default"
       }).then(() => {
-        this.database.executeSql("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)", {}).then((data) => {
+        this.database.executeSql("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT,lastname TEXT, firstname TEXT)", {}).then((data) => {
           console.error("TABLE CREATED");
-          this.database.executeSql("INSERT INTO users (username, password) VALUES ('admin', '123')", []).then((data) => {
+          this.database.executeSql("INSERT INTO users (username, password,lastname,firstname) VALUES (?, ?,?,?)", ["admin", "123","Global","Admin"]).then((data) => {
             console.error("INSERTED: " + JSON.stringify(data));
           }, (error) => {
             console.error("ERROR: " + JSON.stringify(error.err));
@@ -59,8 +59,8 @@ useSqlite(){
 }
 useLocalStorage(){
 this.storage = new Storage(SqlStorage);
-      this.storage.query("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)");
-       this.storage.query("INSERT INTO users (username, password) VALUES (?, ?)", ["admin", "123"]).then((data) => {           
+      this.storage.query("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT,lastname TEXT, firstname TEXT)");
+       this.storage.query("INSERT INTO users (username, password,lastname,firstname) VALUES (?, ?,?,?)", ["admin", "123","Global","Admin"]).then((data) => {           
         }, (error) => {
             console.log(error);
         }); 
