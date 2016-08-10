@@ -9,68 +9,115 @@
 
 <ion-content padding>
 
-<ion-list>
+  <ion-list>
 
 
     <form #pspaForm="ngForm" novalidate>
-      <ion-item>
-        <ion-label primary>Site</ion-label>
-        <ion-input [(ngModel)]="pspa.site" ngControl="site" type="text" #site="ngForm" readonly>
-        </ion-input>
-      </ion-item>
-      
-
-      <ion-item>
-        <ion-label primary> Autheur</ion-label>
-        <ion-input [(ngModel)]="pspa.author" ngControl="author" type="text" readonly>
-        </ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label primary>Date</ion-label>
-        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="pspa.date" ngControl="date" #date="ngForm" required></ion-datetime>
-      </ion-item>
-      <p [hidden]="date.valid || submitted == false" danger padding-left>
-        Date is required
-      </p>
+      <div *ngIf="step=='first'">
+        <ion-item>
+          <ion-label primary>Site</ion-label>
+          <ion-input [(ngModel)]="pspa.site" ngControl="site" type="text" #site="ngForm" readonly>
+          </ion-input>
+        </ion-item>
 
 
-       <ion-item>
-        <ion-label primary>Evénement remonté par:</ion-label>
-        <ion-input [(ngModel)]="pspa.remontedBy" ngControl="remontedBy" type="text" #remontedBy="ngForm" spellcheck="false" autocapitalize="off" required>
-        </ion-input>
+        <ion-item>
+          <ion-label primary> Autheur</ion-label>
+          <ion-input [(ngModel)]="pspa.author" ngControl="author" type="text" readonly>
+          </ion-input>
+        </ion-item>
 
-      </ion-item>
-      <p [hidden]="remontedBy.valid || submitted == false" danger padding-left>
-        Date is required
-      </p>
-
-      <ion-item>
-        <ion-label primary> Fonction</ion-label>
-        <ion-select [(ngModel)]="pspa.fonction" ngControl="fonction" #fonction="ngForm" required>
-            <ion-option *ngFor="let item of fonctions" [value] = "item.value" [checked]="false">{{item.title}}</ion-option>
-        </ion-select>
-      </ion-item>
-      <p [hidden]="fonction.valid || submitted == false" danger padding-left>
-        Fonction is required
-      </p>
-
-      <ion-item>
-        <ion-label primary> Status de la personne</ion-label>
-        <ion-select [(ngModel)]="pspa.status" ngControl="status" #status="ngForm" required>
-          <ion-option *ngFor="let item of statues" [value] = "item.value" [checked]="false">{{item.title}}</ion-option>
-        </ion-select>
-      </ion-item>
-      <p [hidden]="status.valid || submitted == false" danger padding-left>
-       Status is required
-      </p>
+        <ion-item>
+          <ion-label primary>Date</ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="pspa.date" ngControl="date" #date="ngForm" required></ion-datetime>
+        </ion-item>
+        <p [hidden]="date.valid || submitted == false" danger padding-left>
+          Date is required
+        </p>
 
 
-      <ion-row responsive-sm>
-        <ion-col>
-          <button (click)="nextStep(pspaForm)" type="submit" primary block><ion-icon name="arrow-forward"></ion-icon></button>
-        </ion-col>
-      </ion-row>
+        <ion-item>
+          <ion-label primary>Evénement remonté par:</ion-label>
+          <ion-input [(ngModel)]="pspa.remontedBy" ngControl="remontedBy" type="text" #remontedBy="ngForm" spellcheck="false" autocapitalize="off"
+            required>
+          </ion-input>
+
+        </ion-item>
+        <p [hidden]="remontedBy.valid || submitted == false" danger padding-left>
+          Date is required
+        </p>
+
+        <ion-item>
+          <ion-label primary> Fonction</ion-label>
+          <ion-select [(ngModel)]="pspa.fonction" ngControl="fonction" #fonction="ngForm" required>
+            <ion-option *ngFor="let item of fonctions" [value]="item.value" [checked]="false">{{item.title}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <p [hidden]="fonction.valid || submitted == false" danger padding-left>
+          Fonction is required
+        </p>
+
+        <ion-item>
+          <ion-label primary> Status de la personne</ion-label>
+          <ion-select [(ngModel)]="pspa.status" ngControl="status" #status="ngForm" required>
+            <ion-option *ngFor="let item of statues" [value]="item.value" [checked]="false">{{item.title}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <p [hidden]="status.valid || submitted == false" danger padding-left>
+          Status is required
+        </p>
+        <ion-row responsive-sm>
+          <ion-col>
+            <button (click)="nextStep(pspaForm)" primary block><ion-icon name="arrow-forward"></ion-icon></button>
+          </ion-col>
+        </ion-row>
+      </div>
+
+
+      <div *ngIf="step=='second'">
+        <ion-item>
+          <ion-label primary>Type</ion-label>
+          <ion-select [(ngModel)]="pspa.type" ngControl="type" #type="ngForm" interface= "action-sheet" required>
+            <ion-option value="accident">Presque Accident</ion-option>
+            <ion-option value="anomalie">Situation Anomalie</ion-option>
+          </ion-select>
+        </ion-item>
+        <p [hidden]="type.valid || submitted == false" danger padding-left>
+          Type is required
+        </p>
+
+        <ion-item>
+          <ion-label primary>Description</ion-label>
+          <ion-textarea [(ngModel)]="pspa.description" ngControl="description" #description="ngForm" spellcheck="false" 
+            required>
+          </ion-textarea>
+
+        </ion-item>
+        <p [hidden]="description.valid || submitted == false" danger padding-left>
+          Description is required
+        </p>
+
+         <ion-item>
+    <ion-label primary>Ent./Pers.impliquée (O/N)</ion-label>
+    <ion-toggle [(ngModel)]="pspa.other"></ion-toggle>
+  </ion-item>
+
+   <ion-item>
+    <ion-label primary>Matériel impliqué (O/N)</ion-label>
+    <ion-toggle [(ngModel)]="pspa.material"></ion-toggle>
+  </ion-item>
+
+        <ion-row responsive-sm>
+          <ion-col>
+            <button (click)="previousStep(pspaForm)" primary block><ion-icon name="arrow-back"></ion-icon></button>
+          </ion-col>
+          <ion-col>
+            <button (click)="nextStep(pspaForm)" primary block><ion-icon name="arrow-forward"></ion-icon></button>
+          </ion-col>
+        </ion-row>
+      </div>
+
+
     </form>
   </ion-list>
 

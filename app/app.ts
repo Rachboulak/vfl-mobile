@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Platform, ionicBootstrap,SqlStorage, Storage,Events} from 'ionic-angular';
 import {StatusBar, SQLite} from 'ionic-native';
 import {HomePage} from './pages/home/home';
+import {SQLConfig} from './model/sqlconfig';
 
 import {provide} from '@angular/core';
 import {Http, HTTP_PROVIDERS} from '@angular/http';
@@ -25,7 +26,6 @@ export class MyApp {
     platform.ready().then(() => {
       StatusBar.styleDefault();
      
-    
       //database initialisation
       if(platform.is('core')){
         this.useLocalStorage();
@@ -39,31 +39,54 @@ export class MyApp {
   }
 useSqlite(){
   this.database = new SQLite();
+  var tables=SQLConfig.SQL_TABLES;
       this.database.openDatabase({
         name: "data.db",
         location: "default"
       }).then(() => {
-        this.database.executeSql("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT,lastname TEXT, firstname TEXT)", {}).then((data) => {
-          console.error("TABLE CREATED");
-          this.database.executeSql("INSERT INTO users (username, password,lastname,firstname) VALUES (?, ?,?,?)", ["admin", "123","Global","Admin"]).then((data) => {
-            console.error("INSERTED: " + JSON.stringify(data));
-          }, (error) => {
-            console.error("ERROR: " + JSON.stringify(error.err));
-          });
-        }, (error) => {
-          console.error("Unable to execute sql", error);
-        })
+        for(let table of tables){
+                    this.database.executeSql(table.create, {}).then((data) => {
+                            console.log("Table "+table.name+" CREATED!");
+                            for(let line of table.lines){
+
+                              this.database.executeSql(line.script, line.params).then((data) => {
+                                    console.error("INSERTED: " + JSON.stringify(data));
+                                  }, (error) => {
+                                    console.error("ERROR: " + JSON.stringify(error.err));
+                                  });
+                          }
+                    }, (error) => {
+                      console.error("Unable creating table:"+table.name, error);
+                    });
+              }
       }, (error) => {
         console.error("Unable to open database", error);
       });
 }
 useLocalStorage(){
 this.storage = new Storage(SqlStorage);
-      this.storage.query("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT,lastname TEXT, firstname TEXT)");
-       this.storage.query("INSERT INTO users (username, password,lastname,firstname) VALUES (?, ?,?,?)", ["admin", "123","Global","Admin"]).then((data) => {           
+var tables=SQLConfig.SQL_TABLES;
+
+for(let table of tables){
+
+      this.storage.query(table.create).then(
+
+        (data) => {
+          console.log("Table "+table.name+" CREATED!");
+          for(let line of table.lines){
+            this.storage.query(line.script, line.params).then((data) => { 
+                        console.log("Line inserted!");
+                    }, (error) => {
+                        console.log("Error inserting line :"+error);
+                    }); 
+          }
+
+        
         }, (error) => {
-            console.log(error);
-        }); 
+                console.log("ERROR creating table "+table.name,error);
+            });      
+}
+     
 }
   translateConfig() {
 

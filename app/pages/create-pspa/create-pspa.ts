@@ -9,9 +9,12 @@ export class CreatePspaPage  implements OnInit {
   user:any;
     submitted = false;
     report: { line?: string, agency?: string, site?: string } = {};
-    pspa:{site?:string,author?:string,date?:string,remontedBy?:string,fonction?:string,status?:string}={};
+    pspa:{
+      site?:string,author?:string,date?:string,remontedBy?:string,
+      fonction?:string,status?:string,description?:string,type?:string,other?:boolean,material?:boolean}={};
     statues:any;
     fonctions:any;
+    step:string;
  
   constructor(private nav: NavController, private translate: TranslateService,private navparams:NavParams) {
     this.report=this.navparams.get("report");
@@ -24,10 +27,19 @@ export class CreatePspaPage  implements OnInit {
 nextStep(form){
   this.submitted = true;
 if(form.valid){
-
+this.step="second";
+this.submitted=false;
+}
+}
+previousStep(form){
+  this.submitted = true;
+if(form.valid){
+this.step="first";
+this.submitted=false;
 }
 }
  ngOnInit() {
+   this.step="first";
     this.statues=[
                   {
                     value: "status1",
@@ -58,5 +70,6 @@ if(form.valid){
     ];
 
   }
+  
   private onPageDidEnter() {}
 }
