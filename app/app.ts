@@ -9,10 +9,11 @@ import {Http, HTTP_PROVIDERS} from '@angular/http';
 import {TranslateService, TranslatePipe, TranslateLoader, TranslateStaticLoader} from 'ng2-translate/ng2-translate';
 import {LoginPage} from './pages/login/login';
 import {LoginService} from './providers/login-service/login-service';
+import {ReportService} from './providers/report-service/report-service';
 
 @Component({
   template: '<ion-nav [root]="rootPage"></ion-nav>',
-  providers: [LoginService, TranslateService],
+  providers: [LoginService, TranslateService,ReportService],
   pipes: [TranslatePipe]
 })
 export class MyApp {
@@ -77,13 +78,13 @@ for(let table of tables){
             this.storage.query(line.script, line.params).then((data) => { 
                         console.log("Line inserted!");
                     }, (error) => {
-                        console.log("Error inserting line :"+error);
+                        console.log("Error inserting line :"+JSON.stringify(error.err));
                     }); 
           }
 
         
         }, (error) => {
-                console.log("ERROR creating table "+table.name,error);
+                console.log("ERROR creating table "+table.name,JSON.stringify(error));
             });      
 }
      

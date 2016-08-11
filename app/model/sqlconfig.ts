@@ -68,6 +68,28 @@ static SQL_TABLES=[
               params:["Agence 3", "Agence 3"]
           }
    ]
+},
+//table REPORT
+{
+   name:"reports",
+   create:"CREATE TABLE IF NOT EXISTS reports (id INTEGER PRIMARY KEY AUTOINCREMENT, line TEXT, agence TEXT,site TEXT)",
+   lines:[
+          {
+              script:"INSERT INTO reports (line,agence,site) VALUES (?, ?,?)",
+              params:["Granulat", "Usine Casablanca", "Casablanca"]
+          }
+   ]
+},
+//table PASA
+{
+   name:"pasa",
+   create:"CREATE TABLE IF NOT EXISTS pasa (id INTEGER PRIMARY KEY AUTOINCREMENT, site TEXT, author TEXT,date DATE,remontedBy TEXT,fonction TEXT, status TEXT,type TEXT,description TEXT, entpersimplicated BOOLEAN,materialimplicated BOOLEAN,idreport INTEGER, CONSTRAINT fk_PerOrders FOREIGN KEY (idreport) REFERENCES reports(id))",
+   lines:[
+          {
+              script:"INSERT INTO pasa (site, author ,date ,remontedBy ,fonction , status ,type ,description , entpersimplicated ,materialimplicated ,idreport) VALUES (?, ? ,'1993-01-02' ,? ,? , ? ,? ,? , ? ,? ,?)",
+              params:['Casablanca', 'author'  ,'Admin' ,'Administrator' , 'status' ,'Anomalie' ,'description' , true ,false ,1]
+          }
+   ]
 }
 
         ]

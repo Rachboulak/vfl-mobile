@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController ,NavParams} from 'ionic-angular';
 import {TranslatePipe, TranslateService, Parser} from "ng2-translate/ng2-translate";
 import {CreatePspaPage} from '../create-pspa/create-pspa';
+import {ReportService} from '../../providers/report-service/report-service';
 
 @Component({
   templateUrl: 'build/pages/report/report.html',
@@ -10,14 +11,14 @@ import {CreatePspaPage} from '../create-pspa/create-pspa';
 export class ReportPage implements OnInit {
 
     submitted = false;
-    report: { line?: any, agence?: any, site?: any } = {};
+    report: {id?:any, line?: any, agence?: any, site?: any } = {};
     sites:any;
     lines:any;
     agences:any;
     step:string="first";
     user:any;
 
-  constructor(private nav: NavController, private translate: TranslateService,private navparams:NavParams) {
+  constructor(private nav: NavController, private translate: TranslateService,private navparams:NavParams,private reportservice: ReportService) {
     this.user=this.navparams.get("user");
     
   }
@@ -152,14 +153,28 @@ export class ReportPage implements OnInit {
   addVFL(form){
  this.submitted = true;
  if (form.valid) {
-  this.nav.push(CreatePspaPage, { report: this.report });
+
+    this.reportservice.addReport(this.report,(data) => {           
+                console.log("report added!",JSON.stringify(data));
+                  this.reportservice.getID((data) => {           
+                              this.report.id=data.rows.item(0).id;
+                               console.log("id:",data.rows.item(0).id);
+                          }, (error) => {
+                              console.log("error",error);
+                          });
+
+
+            }, (error) => {
+                 console.log("error",error);
+            });
+  //this.nav.push(CreatePspaPage, { report: this.report });
   }
   }
 
 addPASA(form){
  this.submitted = true;
  console.log(JSON.stringify(this.report.line));
- if (form.valid) {
+ if (form.valid) {  
   this.nav.push(CreatePspaPage, { report: this.report ,user:this.user});
   }
   }
