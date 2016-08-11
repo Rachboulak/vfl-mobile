@@ -20,7 +20,8 @@ export class HomePage {
 
   doLogout() {
     this.loginservice.logout();
-    this.navCtrl.push(LoginPage)
+    
+  this.navCtrl.popToRoot(); 
 
   }
   goToReportPage() {
@@ -34,8 +35,6 @@ export class HomePage {
             }, (error) => { console.log(error);
               
             });
-    
-
   }
   goToSearchPage() {
     //this.loginservice.dologin(user,this.nav);

@@ -8,9 +8,9 @@ import {TranslatePipe, TranslateService, Parser} from "ng2-translate/ng2-transla
 export class CreatePspaPage  implements OnInit {
   user:any;
     submitted = false;
-    report: { line?: string, agency?: string, site?: string } = {};
+    report: { line?: any, agency?: any, site?: any } = {};
     pspa:{
-      site?:string,author?:string,date?:string,remontedBy?:string,
+      site?:any,author?:string,date?:string,remontedBy?:string,
       fonction?:string,status?:string,description?:string,type?:string,other?:boolean,material?:boolean}={};
     statues:any;
     fonctions:any;
@@ -19,8 +19,7 @@ export class CreatePspaPage  implements OnInit {
   constructor(private nav: NavController, private translate: TranslateService,private navparams:NavParams) {
     this.report=this.navparams.get("report");
     this.user=this.navparams.get("user");
-    console.log(this.user);
-    this.pspa.site=this.report.site;
+    this.pspa.site=this.report.site.title;
   this.pspa.author=this.user.firstname+" "+this.user.lastname;
   }
 
