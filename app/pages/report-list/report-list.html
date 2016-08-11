@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Reports</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="outer-content report-list">
+  <ion-card *ngFor="let report of reports" class="report">
+
+    <ion-card-header>
+      <ion-item>
+        <!--ion-avatar item-left>
+          <img [src]="report.profilePic">
+        </ion-avatar-->
+        {{report.line}}
+      </ion-item>
+    </ion-card-header>
+
+    <ion-card-content class="outer-content">
+      <ion-list>
+        <!--button ion-item *ngFor="let session of report.sessions" (click)="goToSessionDetail(session)">
+          <h3>{{session.name}}</h3>
+        </button-->
+        <button ion-item (click)="goToReportDetail(report)">
+          <h3>About {{report.line}}</h3>
+        </button>
+      </ion-list>
+    </ion-card-content>
+
+    <ion-item>
+      <!--button (click)="goToSpeakerTwitter(report)" clear item-left>
+        <ion-icon name="logo-twitter"></ion-icon>
+        Tweet
+      </button-->
+      <!--button (click)="openSpeakerShare(report)" clear item-right>
+        <ion-icon name="share"></ion-icon>
+        Share
+      </button-->
+    </ion-item>
+
+  </ion-card>
+</ion-content>

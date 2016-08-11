@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, ViewChild, OnInit} from '@angular/core';
 import {NavController, Nav, Platform,NavParams} from 'ionic-angular';
 import {TranslatePipe, TranslateService} from "ng2-translate/ng2-translate";
 import {LoginPage} from '../login/login';
@@ -6,16 +6,37 @@ import {SearchPage} from "../search/search";
 import {ProfilePage} from "../profile/profile";
 import {ReportPage} from "../report/report";
 import {LoginService} from '../../providers/login-service/login-service';
-
+import { ReportService } from '../../providers/report-service/report-service';
 @Component({
   templateUrl: 'build/pages/home/home.html',
   pipes: [TranslatePipe]
 })
-export class HomePage {
+export class HomePage implements OnInit {
   public user;
-  constructor(private navCtrl: NavController, private translate: TranslateService, private platform: Platform,private navparams:NavParams,private loginservice:LoginService) {
+  public reports;
+  constructor(private navCtrl: NavController, private translate: TranslateService, private platform: Platform,private navparams:NavParams,private loginservice:LoginService,
+  reportService: ReportService) {
     this.user=this.navparams.get("user");
+   //this.reports = reportService.getAllReports();
+    console.log('user ', this.user);
+    console.log('reports ', this.reports);
+    
+  }
 
+  ngOnInit() {
+    this.reports=[
+            {
+              line: "ligne 1",
+              site:"site 1" ,
+              agency: "agency 1"
+            },
+            {
+              line: "ligne 2",
+              site:"site 2" ,
+              agency: "agency 2"
+            }
+            
+            ];
   }
 
   doLogout() {

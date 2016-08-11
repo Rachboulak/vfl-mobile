@@ -55,8 +55,16 @@ export class ReportService extends DatabaseService {
 
        
     }
-   
-    
-   
+ 
+   getAllReports() {
+       this.executePromiseQuery("SELECT * FROM reports ORDER BY id DESC;",[]);
+    /*return this.load().then(data => {
+      return data.speakers.sort((a, b) => {
+        let aName = a.name.split(' ').pop();
+        let bName = b.name.split(' ').pop();
+        return aName.localeCompare(bName);
+      });
+    });*/
+  }
 }
 

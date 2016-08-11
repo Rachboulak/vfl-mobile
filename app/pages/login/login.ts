@@ -5,7 +5,7 @@ import {MenuPage} from '../menu/menu';
 import {User} from '../../model/user';
 import {LoginService} from '../../providers/login-service/login-service';
 import {TranslatePipe, TranslateService, Parser} from "ng2-translate/ng2-translate";
-
+import { TabsPage } from '../tabs/tabs';
 @Component({
     templateUrl: 'build/pages/login/login.html',
     pipes: [TranslatePipe],
@@ -25,7 +25,7 @@ export class LoginPage {
         if (form.valid) {
             this.loginservice.dologin(user, (data) => {
                 if (data.rows.length > 0) {
-                    this.nav.push(HomePage, { user: data.rows.item(0) });
+                    this.nav.push(TabsPage, { user: data.rows.item(0) });
                 }
                 else {
                     this.doAlert(this.nav, "Login failed", "Wrong username or Password");

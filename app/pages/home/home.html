@@ -15,38 +15,30 @@
 
 
 <ion-content padding>
-  
-  <ion-img src="img/fonts-header.png" width="100%" height="auto"></ion-img>
-<ion-list>
-<ion-item>
-<button  full clear primary (click)="goToAccountPage()">
-    <div>
-   <ion-icon name="settings"></ion-icon>
-   
-  <label > My Account</label>
-    </div>
- </button>
-</ion-item>
-<ion-item>
-<button  clear full  primary (click)="goToReportPage()">
-    <div>
-   <ion-icon name="paper"></ion-icon>
-   
-  <label>Write a Rapport</label>
-    </div>
- </button>
-</ion-item>
-<ion-item>
-<button  clear full  primary (click)="goToSearchPage()">
-    <div>
-   <ion-icon name="search"></ion-icon>
-   
-  <label>Visualiser un rapport</label>
-    </div>
- </button>
-</ion-item>
+     <ion-card-header>
+      <ion-item>
+        <ion-avatar item-left>
+          <!--img [src]="img/fonts-header.png"-->
+          <ion-img src="img/fonts-header.png" width="100%" height="auto"></ion-img>
+        </ion-avatar>
+        {{user.username}}
+      </ion-item>
+    </ion-card-header>
 
-</ion-list>
-  
+    <ion-card *ngFor="let report of reports" class="report">
+    <ion-card-content class="outer-content">
+      <ion-list>
+        <!--button ion-item *ngFor="let session of report.sessions" (click)="goToSessionDetail(session)">
+          <h3>{{session.name}}</h3>
+        </button-->
+        <!--button ion-item (click)="goToReportDetail(report)"-->
+        <button ion-item>
+          <h3>Rapport {{report.line}} - {{report.agency}} - {{report.site}} </h3>
+        </button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!--ion-img src="img/fonts-header.png" width="100%" height="auto"></ion-img-->
 
 </ion-content>
