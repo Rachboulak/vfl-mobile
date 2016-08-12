@@ -25,8 +25,8 @@ export class ReportService extends DatabaseService {
     }
     public addPASA(pasa, isSuccess, isError) {
       console.log(pasa);
-        this.executeQuery("INSERT INTO pasa (site, author ,date ,remontedBy ,fonction , status ,type ,description , entpersimplicated ,materialimplicated ,idreport) VALUES (?, ? ,? ,? ,? , ? ,? ,? , ? ,? ,?)",
-            [pasa.site, pasa.author ,pasa.date ,pasa.remontedBy ,pasa.fonction , pasa.status ,pasa.type ,pasa.description , ""+pasa.other ,""+pasa.material ,pasa.idreport],
+        this.executeQuery("INSERT INTO reports (line , agency ,site , author ,date,remonted_by ,function ,status ,type ,description , ent_pers_imp ,material_imp ,material ,type_report ,company_name ,risque_qualification ,zone ,image ,action , solution ,risk ,sub_risk) VALUES ( ? , ? ,? , ? ,?,? ,? ,? ,? ,? , ? ,? ,? ,? ,? ,? ,? ,? ,? , ? ,? ,?)",
+            [pasa.line ,pasa.agency ,pasa.site ,pasa.author ,pasa.date,pasa.remonted_by ,pasa.fonction ,pasa.status ,pasa.type ,pasa.description ,pasa.ent_pers_imp ,pasa.material_imp ,pasa.material ,pasa.type_report ,pasa.company_name ,pasa.risque_qualification ,pasa.zone ,pasa.image ,pasa.action ,pasa.solution ,pasa.risk ,pasa.sub_risk],
             (data) => {
                 isSuccess(data);
                 

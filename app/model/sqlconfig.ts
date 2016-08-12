@@ -72,14 +72,15 @@ static SQL_TABLES=[
 //table REPORT
 {
    name:"reports",
-   create:"CREATE TABLE IF NOT EXISTS reports (id INTEGER PRIMARY KEY AUTOINCREMENT, line TEXT, agence TEXT,site TEXT)",
+   create:"CREATE TABLE IF NOT EXISTS reports (id INTEGER PRIMARY KEY AUTOINCREMENT, line VARCHAR(100), agency VARCHAR(100),site VARCHAR(100), author VARCHAR(100),date DATE,remonted_by VARCHAR(100),function VARCHAR(100), status VARCHAR(100),type VARCHAR(100),description TEXT, ent_pers_imp BOOLEAN,material_imp BOOLEAN,material TEXT,type_report VARCHAR(30),company_name VARCHAR(100),risque_qualification VARCHAR(30),zone VARCHAR(100), image TEXT,action TEXT, solution TEXT,risk VARCHAR(100),sub_risk VARCHAR(100))",
    lines:[
           {
-              script:"INSERT INTO reports (line,agence,site) VALUES (?, ?,?)",
-              params:["Granulat", "Usine Casablanca", "Casablanca"]
+              script:"INSERT INTO reports (line , agency ,site , author ,date,remonted_by ,function ,status ,type ,description , ent_pers_imp ,material_imp ,material ,type_report ,company_name ,risque_qualification ,zone ,image ,action , solution ,risk ,sub_risk) VALUES ( ? , ? ,? , ? ,?,? ,? ,? ,? ,? , ? ,? ,? ,? ,? ,? ,? ,? ,? , ? ,? ,?)",
+              params:['line1' , 'agency1' ,'site1' , 'author' ,'2013-02-03','remonted_by' ,'function' ,'status' ,'anomalie' ,'description' , true ,true ,'material' ,'pasa' ,'company' ,'red' ,'zone1' ,'image' ,'action' , 'solution' ,'risk' ,'sub_risk']
           }
    ]
-},
+}
+/*,
 //table PASA
 {
    name:"pasa",
@@ -90,7 +91,7 @@ static SQL_TABLES=[
               params:['Casablanca', 'author'  ,'Admin' ,'Administrator' , 'status' ,'Anomalie' ,'description' , true ,false ,1]
           }
    ]
-}
+}*/
 
         ]
     

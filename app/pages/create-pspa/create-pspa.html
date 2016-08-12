@@ -13,7 +13,7 @@
 
 
     <form #pspaForm="ngForm" novalidate>
-      <div *ngIf="step=='first'">
+      <div *ngIf="step==1">
         <ion-item>
           <ion-label primary>Site</ion-label>
           <ion-input [(ngModel)]="pspa.site" ngControl="site" type="text" #site="ngForm" readonly>
@@ -74,38 +74,24 @@
       </div>
 
 
-      <div *ngIf="step=='second'">
-        <ion-item>
-          <ion-label primary>Type</ion-label>
-          <ion-select [(ngModel)]="pspa.type" ngControl="type" #type="ngForm" interface= "action-sheet" required>
-            <ion-option value="accident">Presque Accident</ion-option>
-            <ion-option value="anomalie">Situation Anomalie</ion-option>
-          </ion-select>
-        </ion-item>
-        <p [hidden]="type.valid || submitted == false" danger padding-left>
-          Type is required
-        </p>
+      <div *ngIf="step==2">
 
         <ion-item>
-          <ion-label primary>Description</ion-label>
-          <ion-textarea [(ngModel)]="pspa.description" ngControl="description" #description="ngForm" spellcheck="false" 
-            required>
-          </ion-textarea>
-
+          <ion-label primary>Presque Accident/Situation Anormale</ion-label>
+          <ion-toggle [(ngModel)]="pspa.type"></ion-toggle>
         </ion-item>
-        <p [hidden]="description.valid || submitted == false" danger padding-left>
-          Description is required
-        </p>
 
-         <ion-item>
-    <ion-label primary>Ent./Pers.impliquée (O/N)</ion-label>
-    <ion-toggle [(ngModel)]="pspa.other"></ion-toggle>
-  </ion-item>
 
-   <ion-item>
-    <ion-label primary>Matériel impliqué (O/N)</ion-label>
-    <ion-toggle [(ngModel)]="pspa.material"></ion-toggle>
-  </ion-item>
+
+        <ion-item>
+          <ion-label primary>Ent./Pers.impliquée</ion-label>
+          <ion-toggle [(ngModel)]="pspa.other"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label primary>Matériel impliqué</ion-label>
+          <ion-toggle [(ngModel)]="pspa.material"></ion-toggle>
+        </ion-item>
 
         <ion-row responsive-sm>
           <ion-col>
@@ -117,7 +103,38 @@
         </ion-row>
       </div>
 
+      <div *ngIf="step==3">
+        <ion-item>
+          <ion-label primary>Description</ion-label>
+          <ion-textarea [(ngModel)]="pspa.description" rows="6" placeholder="description..." ngControl="description" #description="ngForm"
+            spellcheck="false" required>
+          </ion-textarea>
 
+        </ion-item>
+        <p [hidden]="description.valid || submitted == false" danger padding-left>
+          Description is required
+        </p>
+
+        <ion-row responsive-sm>
+          <ion-col>
+            <button (click)="previousStep(pspaForm)" primary block><ion-icon name="arrow-back"></ion-icon></button>
+          </ion-col>
+          <ion-col>
+            <button (click)="nextStep(pspaForm)" primary block><ion-icon name="arrow-forward"></ion-icon></button>
+          </ion-col>
+        </ion-row>
+      </div>
+      <div *ngIf="step==8">
+        <ion-card>
+          <ion-card-content>
+
+            <button (click)="takePicture()">Prendre une photo</button>
+            <button (click)="uploadPicture()">Ouvrir une photo</button>
+            <img [src]="base64Image" *ngIf="base64Image" />
+          </ion-card-content>
+        </ion-card>
+
+      </div>
     </form>
   </ion-list>
 

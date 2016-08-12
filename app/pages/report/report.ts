@@ -171,20 +171,17 @@ export class ReportPage implements OnInit {
   }
   }
 
-addPASA(form){
- this.submitted = true;
- console.log(JSON.stringify(this.report.line));
- if (form.valid) {  
-  this.nav.push(CreatePspaPage, { report: this.report ,user:this.user});
-  }
-  }
+  addPASA(form){
+    this.submitted = true;
+    if (form.valid) {  
+      this.nav.push(CreatePspaPage, { report: this.report ,user:this.user});
+      }
+      }
 
    updateAgencies(param){
-    console.log(param);
     this.agences=this.report.line.agencies;
   }
    updateSites(param){
-    console.log(param);
     this.sites=this.report.agence.sites;
   }
 }
