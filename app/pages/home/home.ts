@@ -6,24 +6,48 @@ import {SearchPage} from "../search/search";
 import {ProfilePage} from "../profile/profile";
 import {ReportPage} from "../report/report";
 import {LoginService} from '../../providers/login-service/login-service';
-import { ReportService } from '../../providers/report-service/report-service';
+import { ReportService, Report } from '../../providers/report-service/report-service';
 @Component({
   templateUrl: 'build/pages/home/home.html',
   pipes: [TranslatePipe]
 })
-export class HomePage implements OnInit {
+export class HomePage {
   public user;
-  public reports;
+  reports: Report[];
+  reportService;
   constructor(private navCtrl: NavController, private translate: TranslateService, private platform: Platform,private navparams:NavParams,private loginservice:LoginService,
   reportService: ReportService) {
-    this.user=this.navparams.get("user");
-   //this.reports = reportService.getAllReports();
-    console.log('user ', this.user);
-    console.log('reports ', this.reports);
-    
+    console.log('  HomePage constructor ');
+    this.reportService = reportService;
+    this.user=this.navparams.get("user");    
   }
 
-  ngOnInit() {
+    // Initialise the notes by loading data from our DB
+  private loadReports() {
+    this.reports = [];
+    this.reportService.getAllReports().then(
+      data => {
+        this.reports = [];
+        if (data.res.rows.length > 0) {
+          for (var i = 0; i < data.res.rows.length; i++) {
+            let item = data.res.rows.item(i);
+            this.reports.push(new Report(item.line, item.site, item.agence, item.id));
+          }
+        }
+      });
+      console.log(' Load reports ',this.reports );
+      
+  }
+ 
+  onPageDidEnter (){
+    console.log('onPageDidEnter');
+    //this.loadReports();
+  }
+  onPageLoaded() {
+    console.log('onPageLoaded');
+    this.loadReports();
+  }
+  /*ngOnInit() {
     this.reports=[
             {
               line: "ligne 1",
@@ -37,7 +61,7 @@ export class HomePage implements OnInit {
             }
             
             ];
-  }
+  }*/
 
   doLogout() {
     this.loginservice.logout();

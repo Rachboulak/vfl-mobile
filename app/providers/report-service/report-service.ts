@@ -9,6 +9,18 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 
+export class Report {
+  line: string;
+  site: string;
+  agency: string;
+  id: number;
+  constructor(title: string, site: string, agency: string, id: number) {
+    this.line = title;
+    this.site = site;
+    this.agency = agency;
+    this.id = id;
+  }
+}
 
 export class ReportService extends DatabaseService {
 
@@ -35,7 +47,7 @@ export class ReportService extends DatabaseService {
             });
     }
     public getID(isSuccess, isError) {
-        this.executeQuery("SELECT * FROM reports ORDER BY id DESC LIMIT 1;",
+        this.executeQuery("SELECT * FROM reports ORDER BY id DESC LIMIT 1",
             [],
             (data) => {
                 isSuccess(data);
@@ -57,14 +69,8 @@ export class ReportService extends DatabaseService {
     }
  
    getAllReports() {
-       this.executePromiseQuery("SELECT * FROM reports ORDER BY id DESC;",[]);
-    /*return this.load().then(data => {
-      return data.speakers.sort((a, b) => {
-        let aName = a.name.split(' ').pop();
-        let bName = b.name.split(' ').pop();
-        return aName.localeCompare(bName);
-      });
-    });*/
+   // this.executePromiseQuery("SELECT * FROM reports ORDER BY id DESC LIMIT 3",[]);
+    return this.storage.query('SELECT * FROM reports DESC LIMIT 5');
   }
+ 
 }
-

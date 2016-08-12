@@ -15,18 +15,19 @@
 
 
 <ion-content padding>
-     <ion-card-header>
-      <ion-item>
-        <ion-avatar item-left>
-          <!--img [src]="img/fonts-header.png"-->
-          <ion-img src="img/fonts-header.png" width="100%" height="auto"></ion-img>
-        </ion-avatar>
-        {{user.username}}
-      </ion-item>
-    </ion-card-header>
-
+    <ion-item>
+      <ion-thumbnail item-left>
+        <img src="img/user-1.jpeg">
+      </ion-thumbnail>
+      <!--ion-avatar item-left>
+        <img src="img/fonts-header.png">
+      </ion-avatar-->
+      <h2>Idir Idir</h2>
+      <p>{{user.username}}</p>
+      <!--button clear item-right>View</button-->
+  </ion-item>
+    
     <ion-card *ngFor="let report of reports" class="report">
-    <ion-card-content class="outer-content">
       <ion-list>
         <!--button ion-item *ngFor="let session of report.sessions" (click)="goToSessionDetail(session)">
           <h3>{{session.name}}</h3>
@@ -36,9 +37,15 @@
           <h3>Rapport {{report.line}} - {{report.agency}} - {{report.site}} </h3>
         </button>
       </ion-list>
-    </ion-card-content>
   </ion-card>
 
   <!--ion-img src="img/fonts-header.png" width="100%" height="auto"></ion-img-->
 
 </ion-content>
+
+
+<style>
+  .social-cards ion-col {
+    padding: 0;
+  }
+</style>
