@@ -31,7 +31,7 @@ export class HomePage {
         if (data.res.rows.length > 0) {
           for (var i = 0; i < data.res.rows.length; i++) {
             let item = data.res.rows.item(i);
-            this.reports.push(new Report(item.line, item.site, item.agence, item.id));
+            this.reports.push(new Report(item.line, item.site, item.agency,item.date, item.id));
           }
         }
       });

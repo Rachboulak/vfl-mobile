@@ -13,8 +13,9 @@ export class Report {
   line: string;
   site: string;
   agency: string;
+  date : Date;
   id: number;
-  constructor(title: string, site: string, agency: string, id: number) {
+  constructor(title: string, site: string, agency: string, date: Date, id: number) {
     this.line = title;
     this.site = site;
     this.agency = agency;
@@ -70,7 +71,7 @@ export class ReportService extends DatabaseService {
  
    getAllReports() {
    // this.executePromiseQuery("SELECT * FROM reports ORDER BY id DESC LIMIT 3",[]);
-    return this.storage.query('SELECT * FROM reports DESC LIMIT 5');
+    return this.storage.query('SELECT * FROM reports DESC LIMIT 10');
   }
  
 }

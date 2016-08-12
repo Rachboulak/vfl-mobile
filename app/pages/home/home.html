@@ -7,10 +7,10 @@
  </button>
     </ion-buttons>
   </ion-navbar>
-  <div id="user">
+  <!--div id="user">
     <ion-icon name="person"></ion-icon>
     {{user.username}}
-  </div>
+  </div-->
 </ion-header>
 
 
@@ -25,7 +25,17 @@
       <h2>Idir Idir</h2>
       <p>{{user.username}}</p>
       <!--button clear item-right>View</button-->
+      <button outline item-right (click)="goToAccountPage(user)">
+        <!--ion-icon name="more"></ion-icon-->
+        Mon compte
+    </button>
   </ion-item>
+  <ion-item-divider light>Mes rapports</ion-item-divider>
+    <!--ion-item light>
+      <div class="bar bar-header bar-stable">
+        <h1 class="title">Mes rapports</h1>
+      </div>
+    </ion-item-->
     
     <ion-card *ngFor="let report of reports" class="report">
       <ion-list>
@@ -34,9 +44,14 @@
         </button-->
         <!--button ion-item (click)="goToReportDetail(report)"-->
         <button ion-item>
-          <h3>Rapport {{report.line}} - {{report.agency}} - {{report.site}} </h3>
+          <h3>Rapport PA/SA : {{report.line}} - {{report.agency}} - {{report.site}} </h3>
+          <p>Date : {{report.date}}</p>
         </button>
       </ion-list>
+
+       <!--ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+          <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll-->
   </ion-card>
 
   <!--ion-img src="img/fonts-header.png" width="100%" height="auto"></ion-img-->
