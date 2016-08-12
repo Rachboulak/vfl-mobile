@@ -66,7 +66,10 @@ export class HomePage {
   doLogout() {
     this.loginservice.logout();
     
-  this.navCtrl.popToRoot(); 
+  this.navCtrl.setRoot(LoginPage).then((data)=>{
+    console.log(JSON.stringify(data));
+    this.navCtrl.popToRoot();
+  }); 
 
   }
   goToReportPage() {

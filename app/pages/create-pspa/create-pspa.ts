@@ -11,17 +11,25 @@ export class CreatePspaPage  implements OnInit {
     user:any;
     submitted = false;
     report: { id?:any,line?: any, agency?: any, site?: any } = {};
-    pspa:{line?:any ,  agency?:any , site?:any ,  author?:any , date?:any , remonted_by?:any , fonction?:any , status?:any , type?:any , description?:any ,  ent_pers_imp?:any , material_imp?:any , material?:any , type_report?:any , company_name?:any , risque_qualification?:any , zone?:any , image?:any , action?:any ,  solution?:any , risk?:any , sub_risk}={};
+    pspa:{line?:any,agency?:any,site?:any ,author?:any ,
+       date?:any , remonted_by?:any , fonction?:any ,
+        status?:any , type?:any , description?:any , 
+         ent_pers_imp?:any , material_imp?:any ,
+          material?:any , type_report?:any , 
+          company_name?:any , risque_qualification?:any ,
+           zone?:any , image?:any , action?:any ,
+             solution?:any , risk?:any , sub_risk?: any}={};
     statues:any;
     fonctions:any;
     step:number;
-     public base64Image: string;
+     public base64Images: any;
  
   constructor(private nav: NavController, private translate: TranslateService,private navparams:NavParams,private reportservice:ReportService) {
     this.report=this.navparams.get("report");
     this.user=this.navparams.get("user");
     this.pspa.site=this.report.site.title;
   this.pspa.author=this.user.firstname+" "+this.user.lastname;
+  this.base64Images=[];
   }
 
 nextStep(form){
@@ -40,30 +48,30 @@ this.submitted=false;
    this.step=1;
     this.statues=[
                   {
-                    value: "status1",
-                    title:"Status 1"  
+                    value: "Lafarge",
+                    title:"Lafarge"  
                   },
                   {
-                    value: "status2",
-                    title:"Status 2"  
+                    value: "Fournisseur",
+                    title:"Fournisseur"  
                   },
                   {
-                    value: "status3",
-                    title:"Status 3"  
+                    value: "Transporteur",
+                    title:"Transporteur"  
                   }
     ];
        this.fonctions=[
                   {
-                    value: "fonction1",
-                    title:"Fonction 1"  
+                    value: "Agent",
+                    title:"Agent"  
                   },
                   {
-                    value: "fonction2",
-                    title:"Fonction 2"  
+                    value: "Administrateur",
+                    title:"Administrateur"  
                   },
                   {
-                    value: "fonction3",
-                    title:"Fonction 3"  
+                    value: "Manager",
+                    title:"Manager"  
                   }
     ];
 
@@ -76,7 +84,7 @@ this.submitted=false;
         targetHeight: 1000
     }).then((imageData) => {
       // imageData is a base64 encoded string
-        this.base64Image = "data:image/jpeg;base64," + imageData;
+        this.base64Images.push( "data:image/jpeg;base64," + imageData);
     }, (err) => {
         console.log(err);
     });
@@ -89,7 +97,7 @@ this.submitted=false;
         targetHeight: 1000
     }).then((imageData) => {
       // imageData is a base64 encoded string
-        this.base64Image = "data:image/jpeg;base64," + imageData;
+        this.base64Images.push( "data:image/jpeg;base64," + imageData);
     }, (err) => {
         console.log(err);
     });

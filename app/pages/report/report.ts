@@ -28,120 +28,120 @@ export class ReportPage implements OnInit {
     this.agences=[];
          this.lines=[
                   {
-                    value: "Ligne1",
-                    title:"Ligne 1" ,
+                    value: "bétons",
+                    title:"bétons" ,
                     agencies: [
                                 {
-                                  value: "agence1",
-                                  title:"Agence 1",
+                                  value: "Casablanca",
+                                  title:"Casablanca",
                                   sites:[
                                         {
-                                          value: "Site",
-                                          title:"Site 1"  
+                                          value: "Central à Béton Mouhammedia",
+                                          title:"Central à Béton Mouhammedia"  
                                         },
                                         {
-                                          value: "Site",
-                                          title:"Site 2"  
+                                          value: "Central à Béton Bouskoura",
+                                          title:"Central à Béton Mouhammedia"  
                                         },
                                         {
-                                          value: "Site",
-                                          title:"Site 3"  
+                                          value: "Central à Béton Ain Sebaa",
+                                          title:"Central à Béton Ain Sebaa"  
                                         }
                                       ]
                                 },
                                 {
-                                  value: "agence2",
-                                  title:"Agence2"  ,
+                                  value: "Rabat",
+                                  title:"Rabat"  ,
                                   sites:[
                                         {
-                                          value: "Site4",
-                                          title:"Site 4"  
+                                          value: "Central à Béton Rabat",
+                                          title:"Central à Béton Rabat"  
                                         },
                                         {
-                                          value: "Site5",
-                                          title:"Site 5"  
+                                          value: "Central à Béton Agdal ",
+                                          title:"Central à Béton Agdal"  
                                         },
                                         {
-                                          value: "Site6",
-                                          title:"Site 6"  
+                                          value: "Central à Béton Temara",
+                                          title:"Central à Béton Temara"  
                                         }
                                       ]
                                 },
                                 {
-                                  value: "agence3",
-                                  title:"Agence 3"  ,
+                                  value: "Tanger",
+                                  title:"Tanger"  ,
                                   sites:[
                                         {
-                                          value: "Site34",
-                                          title:"Site 34"  
+                                          value: "Site de Tétouan",
+                                          title:"Site de Tétouan"  
                                         },
                                         {
-                                          value: "Site35",
-                                          title:"Site 35"  
+                                          value: "Site de Tanger",
+                                          title:"Site de Tanger"  
                                         },
                                         {
-                                          value: "Site36",
-                                          title:"Site 36"  
+                                          value: "Central à Béton Tanger ",
+                                          title:"Central à Béton Tanger"  
                                         }
                                       ]
                                 }
                             ]
                   },
                   {
-                    value: "ligne2",
-                    title:"Ligne 2" ,
+                    value: "granulats",
+                    title:"granulats" ,
                     agencies: [
                                 {
-                                  value: "agence6",
-                                  title:"Agence 6" ,
+                                  value: "Casablanca",
+                                  title:"Casablanca" ,
                                   sites:[
                                         {
-                                          value: "Site10",
-                                          title:"Site 10"  
+                                          value: "Usine Bouskoura",
+                                          title:"Usine Bouskoura"  
                                         },
                                         {
-                                          value: "Site12",
-                                          title:"Site 12"  
+                                          value: "Centre de distribution Khouribga",
+                                          title:"Centre de distribution Khouribga"  
                                         },
                                         {
-                                          value: "Site13",
-                                          title:"Site 13"  
+                                          value: "Usine Mouhammedia",
+                                          title:"Usine Mouhammedia"  
                                         }
                                       ]
                                 },
                                 {
-                                  value: "agence13",
-                                  title:"Agence13"  ,
+                                  value: "Eljadida",
+                                  title:"Eljadida"  ,
                                   sites:[
                                         {
-                                          value: "Site20",
-                                          title:"Site 20"  
+                                          value: "Usine Eljadida",
+                                          title:"Usine Eljadida"  
                                         },
                                         {
-                                          value: "Site22",
-                                          title:"Site 22"  
+                                          value: "Usine Safi",
+                                          title:"Usine Safi"  
                                         },
                                         {
-                                          value: "Site23",
-                                          title:"Site 23"  
+                                          value: "Centre de distribution Safi",
+                                          title:"Centre de distribution Safi"  
                                         }
                                       ]
                                 },
                                 {
-                                  value: "agence8",
-                                  title:"Agence 8"  ,
+                                  value: "Tanger",
+                                  title:"Tanger"  ,
                                   sites:[
                                         {
-                                          value: "Site10",
-                                          title:"Site 10"  
+                                          value: "Usine Tanger",
+                                          title:"Usine Tanger"  
                                         },
                                         {
-                                          value: "Site12",
-                                          title:"Site 12"  
+                                          value: "Usine Tétouan",
+                                          title:"Usine Tétouan"  
                                         },
                                         {
-                                          value: "Site13",
-                                          title:"Site 13"  
+                                          value: "Centre de distribution Tanger",
+                                          title:"Centre de distribution Tanger"  
                                         }
                                       ]
                                 }

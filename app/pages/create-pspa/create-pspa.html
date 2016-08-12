@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>create-pspa</ion-title>
+    <ion-title>Nouvelle PA/SA</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -28,11 +28,11 @@
         </ion-item>
 
         <ion-item>
-          <ion-label primary>Date</ion-label>
+          <ion-label primary>Date de l'événement</ion-label>
           <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="pspa.date" ngControl="date" #date="ngForm" required></ion-datetime>
         </ion-item>
         <p [hidden]="date.valid || submitted == false" danger padding-left>
-          Date is required
+          Le champ Date de l'événement est obligatoire
         </p>
 
 
@@ -44,7 +44,7 @@
 
         </ion-item>
         <p [hidden]="remontedBy.valid || submitted == false" danger padding-left>
-          Date is required
+          Le champ Evénement remonté par est obligatoire
         </p>
 
         <ion-item>
@@ -54,17 +54,17 @@
           </ion-select>
         </ion-item>
         <p [hidden]="fonction.valid || submitted == false" danger padding-left>
-          Fonction is required
+          Le champ Fonction est obligatoire
         </p>
 
         <ion-item>
-          <ion-label primary> Status de la personne</ion-label>
+          <ion-label primary> Statut de la personne</ion-label>
           <ion-select [(ngModel)]="pspa.status" ngControl="status" #status="ngForm" required>
             <ion-option *ngFor="let item of statues" [value]="item.value" [checked]="false">{{item.title}}</ion-option>
           </ion-select>
         </ion-item>
         <p [hidden]="status.valid || submitted == false" danger padding-left>
-          Status is required
+          Le champ Statut de la personne est obligatoire
         </p>
         <ion-row responsive-sm>
           <ion-col>
@@ -84,7 +84,7 @@
 
 
         <ion-item>
-          <ion-label primary>Ent./Pers.impliquée</ion-label>
+          <ion-label primary>Ent./Pers. impliquée</ion-label>
           <ion-toggle [(ngModel)]="pspa.other"></ion-toggle>
         </ion-item>
 
@@ -112,7 +112,7 @@
 
         </ion-item>
         <p [hidden]="description.valid || submitted == false" danger padding-left>
-          Description is required
+          Le champ Description est obligatoire
         </p>
 
         <ion-row responsive-sm>
@@ -124,13 +124,27 @@
           </ion-col>
         </ion-row>
       </div>
-      <div *ngIf="step==8">
+      <div *ngIf="step==4">
         <ion-card>
+          <ion-card-header>
+            Ajouter des photos
+          </ion-card-header>
           <ion-card-content>
+            <button primary clear (click)="takePicture()"><ion-icon name="folder-open"></ion-icon>Prendre</button>
+            <button primary clear (click)="uploadPicture()"><ion-icon name="camera"></ion-icon>Ouvrir</button>
 
-            <button (click)="takePicture()">Prendre une photo</button>
-            <button (click)="uploadPicture()">Ouvrir une photo</button>
-            <img [src]="base64Image" *ngIf="base64Image" />
+            <ion-list *ngIf="base64Images">
+              <ion-list-header>
+                Images ajoutées
+              </ion-list-header>
+              <ion-item *ngFor="let base64Image of base64Images">
+                <img [src]="base64Image"/>
+              </ion-item>
+            </ion-list>
+
+
+
+
           </ion-card-content>
         </ion-card>
 
