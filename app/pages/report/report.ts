@@ -11,10 +11,10 @@ import {ReportService} from '../../providers/report-service/report-service';
 export class ReportPage implements OnInit {
 
     submitted = false;
-    report: {id?:any, line?: any, agence?: any, site?: any } = {};
+    report: {id?:any, line?: any, agency?: any, site?: any } = {};
     sites:any;
     lines:any;
-    agences:any;
+    agencies:any;
     step:string="first";
     user:any;
 
@@ -25,9 +25,9 @@ export class ReportPage implements OnInit {
  
   ngOnInit() {
     this.sites=[];
-    this.agences=[];
-         this.lines=[
-                  {
+    this.agencies=[];
+    this.lines=[];
+                 /* {
                     value: "bétons",
                     title:"bétons" ,
                     agencies: [
@@ -41,7 +41,7 @@ export class ReportPage implements OnInit {
                                         },
                                         {
                                           value: "Central à Béton Bouskoura",
-                                          title:"Central à Béton Mouhammedia"  
+                                          title:"Central à Béton Bouskoura"  
                                         },
                                         {
                                           value: "Central à Béton Ain Sebaa",
@@ -146,29 +146,34 @@ export class ReportPage implements OnInit {
                                       ]
                                 }
                             ]
-                  }
-    ];
-  }
-
-  addVFL(form){
- this.submitted = true;
- if (form.valid) {
-
-    this.reportservice.addReport(this.report,(data) => {           
-                console.log("report added!",JSON.stringify(data));
-                  this.reportservice.getID((data) => {           
-                              this.report.id=data.rows.item(0).id;
-                               console.log("id:",data.rows.item(0).id);
-                          }, (error) => {
-                              console.log("error",error);
-                          });
-
-
+                  }*/
+    
+    this.reportservice.getProductLines(
+          (data) => {           
+                 for(var i=0; i<data.rows.length;i++){
+                    this.lines.push(data.rows.item(i));
+                 }
             }, (error) => {
                  console.log("error",error);
             });
-  //this.nav.push(CreatePspaPage, { report: this.report });
   }
+
+  addVFL(form){
+    this.submitted = true;
+    if (form.valid) {
+        this.reportservice.addReport(this.report,
+                  (data) => {           
+                    console.log("report added!",JSON.stringify(data));
+                      this.reportservice.getID((data) => {           
+                                  this.report.id=data.rows.item(0).id;
+                                  console.log("id:",data.rows.item(0).id);
+                              }, (error) => {
+                                  console.log("error",error);
+                              });
+                }, (error) => {
+                    console.log("error",error);
+                });
+      }
   }
 
   addPASA(form){
@@ -179,9 +184,22 @@ export class ReportPage implements OnInit {
       }
 
    updateAgencies(param){
-    this.agences=this.report.line.agencies;
+      this.reportservice.getAgenciesByProductLineID(param.id,(data) => {           
+                 for(var i=0; i<data.rows.length;i++){
+                    this.agencies.push(data.rows.item(i));
+                 }
+            }, (error) => {
+                 console.log("error",error);
+            });
   }
+
    updateSites(param){
-    this.sites=this.report.agence.sites;
+      this.reportservice.getSitesByAgencyID(param.id,(data) => {           
+                 for(var i=0; i<data.rows.length;i++){
+                    this.sites.push(data.rows.item(i));
+                 }
+            }, (error) => {
+                 console.log("error",error);
+            });
   }
 }

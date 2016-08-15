@@ -22,14 +22,13 @@ export class CreatePspaPage  implements OnInit {
     statues:any;
     fonctions:any;
     step:number;
-     public base64Images: any;
+    base64Images: any;
+    risks:any;
+    subrisks:any;
+    risque_qualifications:any;
  
   constructor(private nav: NavController, private translate: TranslateService,private navparams:NavParams,private reportservice:ReportService) {
-    this.report=this.navparams.get("report");
-    this.user=this.navparams.get("user");
-    this.pspa.site=this.report.site.title;
-  this.pspa.author=this.user.firstname+" "+this.user.lastname;
-  this.base64Images=[];
+
   }
 
 nextStep(form){
@@ -45,61 +44,85 @@ this.submitted=false;
 
 }
  ngOnInit() {
-   this.step=1;
-    this.statues=[
-                  {
-                    value: "Lafarge",
-                    title:"Lafarge"  
-                  },
-                  {
-                    value: "Fournisseur",
-                    title:"Fournisseur"  
-                  },
-                  {
-                    value: "Transporteur",
-                    title:"Transporteur"  
-                  }
-    ];
-       this.fonctions=[
-                  {
-                    value: "Agent",
-                    title:"Agent"  
-                  },
-                  {
-                    value: "Administrateur",
-                    title:"Administrateur"  
-                  },
-                  {
-                    value: "Manager",
-                    title:"Manager"  
-                  }
-    ];
+    this.report=this.navparams.get("report");
+    this.user=this.navparams.get("user");
+    this.pspa.site=this.report.site;
+    this.pspa.author=this.user;
+    this.pspa.risque_qualification=1;
+    this.base64Images=[];
+    this.step=1;
+    this.statues=[];
+    this.fonctions=[];
+    this.subrisks=[];
+    this.risks=[];
+    this.risque_qualifications=["Faible","Jaune","Rouge","Noir"]
+
+
+    this.reportservice.getStatues(
+      (data) => {           
+                 for(var i=0; i<data.rows.length;i++){
+                    this.statues.push(data.rows.item(i));
+                 }
+            }, (error) => {
+                 console.log("error",error);
+            });
+
+    this.reportservice.getFunctions(
+      (data) => {           
+                 for(var i=0; i<data.rows.length;i++){
+                    this.fonctions.push(data.rows.item(i));
+                 }
+            }, (error) => {
+                 console.log("error",error);
+            });
+
+    this.reportservice.getRisks(
+      (data) => {           
+                 for(var i=0; i<data.rows.length;i++){
+                    this.risks.push(data.rows.item(i));
+                 }
+            }, (error) => {
+                 console.log("error",error);
+            });
+
+
 
   }
-  
-    takePicture(){
-    Camera.getPicture({
-        destinationType: Camera.DestinationType.DATA_URL,
-        targetWidth: 1000,
-        targetHeight: 1000
-    }).then((imageData) => {
-      // imageData is a base64 encoded string
-        this.base64Images.push( "data:image/jpeg;base64," + imageData);
-    }, (err) => {
-        console.log(err);
-    });
+
+  updateSubRisks(event){
+    this.reportservice.getSubRisksByRiskID(event,(data) => {           
+                 for(var i=0; i<data.rows.length;i++){
+                    this.subrisks.push(data.rows.item(i));
+                 }
+            }, (error) => {
+                 console.log("error",error);
+            });
   }
+
+    takePicture(){
+        Camera.getPicture({
+            destinationType: Camera.DestinationType.DATA_URL,
+            targetWidth: 1000,
+            targetHeight: 1000
+        }).then((imageData) => {
+          // imageData is a base64 encoded string
+            this.base64Images.push( "data:image/jpeg;base64," + imageData);
+        }, (err) => {
+            console.log(err);
+        });
+  }
+
   uploadPicture(){
-    Camera.getPicture({
-        destinationType: Camera.DestinationType.DATA_URL,
-        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-        targetWidth: 1000,
-        targetHeight: 1000
-    }).then((imageData) => {
-      // imageData is a base64 encoded string
-        this.base64Images.push( "data:image/jpeg;base64," + imageData);
-    }, (err) => {
-        console.log(err);
-    });
+        Camera.getPicture({
+            destinationType: Camera.DestinationType.DATA_URL,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            targetWidth: 1000,
+            targetHeight: 1000
+        }).then((imageData) => {
+          // imageData is a base64 encoded string
+            this.base64Images.push( "data:image/jpeg;base64," + imageData);
+        }, (err) => {
+            console.log(err);
+        });
   }
 }

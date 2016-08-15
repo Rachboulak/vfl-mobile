@@ -7,14 +7,14 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding  *ngIf="lines">
   <ion-list>
 
     <form #reportForm="ngForm" novalidate>
       <ion-item>
         <ion-label primary> Ligne Produit</ion-label>
         <ion-select [(ngModel)]="report.line" ngControl="line" #line="ngForm" required (ionChange)="updateAgencies($event)">
-            <ion-option *ngFor="let line of lines" [value] = "line" [checked]="false">{{line.title}}</ion-option>
+            <ion-option *ngFor="let line of lines" [value] = "line" [checked]="false">{{line.label}}</ion-option>
         </ion-select>
       </ion-item>
       <p [hidden]="line.valid || submitted == false" danger padding-left>
@@ -23,11 +23,11 @@
 
       <ion-item>
         <ion-label primary> Agence/Secteur/Usine</ion-label>
-        <ion-select [(ngModel)]="report.agence" ngControl="agence" #agence="ngForm" (ionChange)="updateSites($event)" required>
-          <ion-option *ngFor="let agence of agences" [value] = "agence" [checked]="false">{{agence.title}}</ion-option>
+        <ion-select [(ngModel)]="report.agency" ngControl="agency" #agency="ngForm" (ionChange)="updateSites($event)" required>
+          <ion-option *ngFor="let agency of agencies" [value] = "agency" [checked]="false">{{agency.label}}</ion-option>
         </ion-select>
       </ion-item>
-      <p [hidden]="agence.valid || submitted == false" danger padding-left>
+      <p [hidden]="agency.valid || submitted == false" danger padding-left>
         Agence/Secteur/Usine is required
       </p>
 
@@ -35,7 +35,7 @@
       <ion-item>
         <ion-label primary> Site</ion-label>
         <ion-select [(ngModel)]="report.site" ngControl="site" #site="ngForm" required>
-          <ion-option *ngFor="let site of sites" [value] = "site" [checked]="false">{{site.title}}</ion-option>
+          <ion-option *ngFor="let site of sites" [value] = "site" [checked]="false">{{site.label}}</ion-option>
         </ion-select>
       </ion-item>
       <p [hidden]="site.valid || submitted == false" danger padding-left>

@@ -16,7 +16,7 @@ export class LoginService extends DatabaseService {
     localStorage = new Storage(LocalStorage);
 
     public dologin(user, isSuccess, isError) {
-        this.executeQuery("Select * from users where username=? and password=?",
+        this.executeQuery("Select id,firstname,lastname from users where username=? and password=?",
             [user.username, user.password],
             (data) => {
                 isSuccess(data);

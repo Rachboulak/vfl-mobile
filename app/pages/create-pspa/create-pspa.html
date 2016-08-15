@@ -16,14 +16,14 @@
       <div *ngIf="step==1">
         <ion-item>
           <ion-label primary>Site</ion-label>
-          <ion-input [(ngModel)]="pspa.site" ngControl="site" type="text" #site="ngForm" readonly>
+          <ion-input [(ngModel)]="pspa.site.label" type="text" readonly>
           </ion-input>
         </ion-item>
 
 
         <ion-item>
           <ion-label primary> Autheur</ion-label>
-          <ion-input [(ngModel)]="pspa.author" ngControl="author" type="text" readonly>
+          <ion-input [(ngModel)]="pspa.author.firstname+' '+pspa.author.lastname" type="text" readonly>
           </ion-input>
         </ion-item>
 
@@ -50,7 +50,7 @@
         <ion-item>
           <ion-label primary> Fonction</ion-label>
           <ion-select [(ngModel)]="pspa.fonction" ngControl="fonction" #fonction="ngForm" required>
-            <ion-option *ngFor="let item of fonctions" [value]="item.value" [checked]="false">{{item.title}}</ion-option>
+            <ion-option *ngFor="let item of fonctions" [value]="item.id" [checked]="false">{{item.label}}</ion-option>
           </ion-select>
         </ion-item>
         <p [hidden]="fonction.valid || submitted == false" danger padding-left>
@@ -60,7 +60,7 @@
         <ion-item>
           <ion-label primary> Statut de la personne</ion-label>
           <ion-select [(ngModel)]="pspa.status" ngControl="status" #status="ngForm" required>
-            <ion-option *ngFor="let item of statues" [value]="item.value" [checked]="false">{{item.title}}</ion-option>
+            <ion-option *ngFor="let item of statues" [value]="item.id" [checked]="false">{{item.label}}</ion-option>
           </ion-select>
         </ion-item>
         <p [hidden]="status.valid || submitted == false" danger padding-left>
@@ -106,7 +106,7 @@
       <div *ngIf="step==3">
         <ion-item>
           <ion-label primary>Description</ion-label>
-          <ion-textarea [(ngModel)]="pspa.description" rows="6" placeholder="description..." ngControl="description" #description="ngForm"
+          <ion-textarea [(ngModel)]="pspa.description" rows="8" placeholder="description..." ngControl="description" #description="ngForm"
             spellcheck="false" required>
           </ion-textarea>
 
@@ -124,7 +124,84 @@
           </ion-col>
         </ion-row>
       </div>
+
       <div *ngIf="step==4">
+        <ion-item>
+          <ion-label primary>Action Immédiate</ion-label>
+          <ion-textarea [(ngModel)]="pspa.action" rows="6" placeholder="Action immédiate..." ngControl="action" #action="ngForm" spellcheck="false"
+            required>
+          </ion-textarea>
+
+        </ion-item>
+        <p [hidden]="action.valid || submitted == false" danger padding-left>
+          Le champ Action Immédiate est obligatoire
+        </p>
+
+        <ion-item>
+          <ion-label primary>Proposition de solution</ion-label>
+          <ion-textarea [(ngModel)]="pspa.solution" rows="6" placeholder="Solution proposée..." ngControl="solution" #solution="ngForm"
+            spellcheck="false" required>
+          </ion-textarea>
+
+        </ion-item>
+        <p [hidden]="solution.valid || submitted == false" danger padding-left>
+          Le champ Proposition de solution est obligatoire
+        </p>
+
+
+        <ion-row responsive-sm>
+          <ion-col>
+            <button (click)="previousStep(pspaForm)" primary block><ion-icon name="arrow-back"></ion-icon></button>
+          </ion-col>
+          <ion-col>
+            <button (click)="nextStep(pspaForm)" primary block><ion-icon name="arrow-forward"></ion-icon></button>
+          </ion-col>
+        </ion-row>
+      </div>
+      <div *ngIf="step==5">
+        <ion-item>
+          <ion-label primary> Risque</ion-label>
+          <ion-select [(ngModel)]="pspa.risk" ngControl="risk" #risk="ngForm" required (ionChange)="updateSubRisks($event)">
+            <ion-option *ngFor="let risk of risks" [value]="risk.id" [checked]="false">{{risk.label}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <p [hidden]="risk.valid || submitted == false" danger padding-left>
+          Le champ risque est obligatoire
+        </p>
+
+        <ion-item>
+          <ion-label primary> Sous-risque</ion-label>
+          <ion-select [(ngModel)]="pspa.sub_risk" ngControl="sub_risk" #sub_risk="ngForm" required>
+            <ion-option *ngFor="let sub of subrisks" [value]="sub.id" [checked]="false">{{sub.label}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <p [hidden]="sub_risk.valid || submitted == false" danger padding-left>
+          Le champ Sous-risque est obligatoire
+        </p>
+        <ion-item>
+          <ion-range min="1" max="4" step="1" snaps="true" [(ngModel)]="pspa.risque_qualification" danger>
+            <ion-label secondary range-left>Faible</ion-label>
+            <ion-label range-right danger>Noir</ion-label>
+          </ion-range>
+        </ion-item>
+        <p primary *ngIf="pspa.risque_qualification">
+          <center>{{risque_qualifications[pspa.risque_qualification-1]}}</center>
+        </p>
+
+
+
+        
+        <ion-row responsive-sm>
+          <ion-col>
+            <button (click)="previousStep(pspaForm)" primary block><ion-icon name="arrow-back"></ion-icon></button>
+          </ion-col>
+          <ion-col>
+            <button (click)="nextStep(pspaForm)" primary block><ion-icon name="arrow-forward"></ion-icon></button>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <div *ngIf="step==8">
         <ion-card>
           <ion-card-header>
             Ajouter des photos
@@ -138,7 +215,7 @@
                 Images ajoutées
               </ion-list-header>
               <ion-item *ngFor="let base64Image of base64Images">
-                <img [src]="base64Image"/>
+                <img [src]="base64Image" />
               </ion-item>
             </ion-list>
 
