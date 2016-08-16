@@ -30,8 +30,10 @@ export class MyApp {
       //database initialisation
       if(platform.is('core')){
         this.useLocalStorage();
+        console.log("***************USING SQLSTORAGE********************");
       }else{
          this.useSqlite();
+         console.log("***************USING SQLite********************");
       }    
       //i18n
       this.translateConfig();
@@ -45,15 +47,16 @@ useSqlite(){
         name: "data.db",
         location: "default"
       }).then(() => {
+        console.log("------------------Creating tables-------------------");
         for(let table of tables){
                     this.database.executeSql(table.create, {}).then((data) => {
                             console.log("Table "+table.name+" CREATED!");
                             for(let line of table.lines){
 
                               this.database.executeSql(line.script, line.params).then((data) => {
-                                    console.error("INSERTED: " + JSON.stringify(data));
+                                    console.log("INSERTED in: "+table.name+" " + JSON.stringify(data));
                                   }, (error) => {
-                                    console.error("ERROR: " + JSON.stringify(error.err));
+                                    console.log("ERROR: "+table.name+" "+line.script+" \n" + JSON.stringify(error.err));
                                   });
                           }
                     }, (error) => {
@@ -80,9 +83,7 @@ for(let table of tables){
                     }, (error) => {
                         console.log("Error inserting line :"+JSON.stringify(error.err));
                     }); 
-          }
-
-        
+          }  
         }, (error) => {
                 console.log("ERROR creating table "+table.name,JSON.stringify(error));
             });      

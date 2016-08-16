@@ -18,7 +18,9 @@ export class ReportPage implements OnInit {
     step:string="first";
     user:any;
 
-  constructor(private nav: NavController, private translate: TranslateService,private navparams:NavParams,private reportservice: ReportService) {
+  constructor(private nav: NavController,
+           private translate: TranslateService,private navparams:NavParams,
+           private reportservice: ReportService) {
     this.user=this.navparams.get("user");
     
   }
@@ -27,126 +29,6 @@ export class ReportPage implements OnInit {
     this.sites=[];
     this.agencies=[];
     this.lines=[];
-                 /* {
-                    value: "bétons",
-                    title:"bétons" ,
-                    agencies: [
-                                {
-                                  value: "Casablanca",
-                                  title:"Casablanca",
-                                  sites:[
-                                        {
-                                          value: "Central à Béton Mouhammedia",
-                                          title:"Central à Béton Mouhammedia"  
-                                        },
-                                        {
-                                          value: "Central à Béton Bouskoura",
-                                          title:"Central à Béton Bouskoura"  
-                                        },
-                                        {
-                                          value: "Central à Béton Ain Sebaa",
-                                          title:"Central à Béton Ain Sebaa"  
-                                        }
-                                      ]
-                                },
-                                {
-                                  value: "Rabat",
-                                  title:"Rabat"  ,
-                                  sites:[
-                                        {
-                                          value: "Central à Béton Rabat",
-                                          title:"Central à Béton Rabat"  
-                                        },
-                                        {
-                                          value: "Central à Béton Agdal ",
-                                          title:"Central à Béton Agdal"  
-                                        },
-                                        {
-                                          value: "Central à Béton Temara",
-                                          title:"Central à Béton Temara"  
-                                        }
-                                      ]
-                                },
-                                {
-                                  value: "Tanger",
-                                  title:"Tanger"  ,
-                                  sites:[
-                                        {
-                                          value: "Site de Tétouan",
-                                          title:"Site de Tétouan"  
-                                        },
-                                        {
-                                          value: "Site de Tanger",
-                                          title:"Site de Tanger"  
-                                        },
-                                        {
-                                          value: "Central à Béton Tanger ",
-                                          title:"Central à Béton Tanger"  
-                                        }
-                                      ]
-                                }
-                            ]
-                  },
-                  {
-                    value: "granulats",
-                    title:"granulats" ,
-                    agencies: [
-                                {
-                                  value: "Casablanca",
-                                  title:"Casablanca" ,
-                                  sites:[
-                                        {
-                                          value: "Usine Bouskoura",
-                                          title:"Usine Bouskoura"  
-                                        },
-                                        {
-                                          value: "Centre de distribution Khouribga",
-                                          title:"Centre de distribution Khouribga"  
-                                        },
-                                        {
-                                          value: "Usine Mouhammedia",
-                                          title:"Usine Mouhammedia"  
-                                        }
-                                      ]
-                                },
-                                {
-                                  value: "Eljadida",
-                                  title:"Eljadida"  ,
-                                  sites:[
-                                        {
-                                          value: "Usine Eljadida",
-                                          title:"Usine Eljadida"  
-                                        },
-                                        {
-                                          value: "Usine Safi",
-                                          title:"Usine Safi"  
-                                        },
-                                        {
-                                          value: "Centre de distribution Safi",
-                                          title:"Centre de distribution Safi"  
-                                        }
-                                      ]
-                                },
-                                {
-                                  value: "Tanger",
-                                  title:"Tanger"  ,
-                                  sites:[
-                                        {
-                                          value: "Usine Tanger",
-                                          title:"Usine Tanger"  
-                                        },
-                                        {
-                                          value: "Usine Tétouan",
-                                          title:"Usine Tétouan"  
-                                        },
-                                        {
-                                          value: "Centre de distribution Tanger",
-                                          title:"Centre de distribution Tanger"  
-                                        }
-                                      ]
-                                }
-                            ]
-                  }*/
     
     this.reportservice.getProductLines(
           (data) => {           
@@ -184,7 +66,9 @@ export class ReportPage implements OnInit {
       }
 
    updateAgencies(param){
-      this.reportservice.getAgenciesByProductLineID(param.id,(data) => {           
+      this.reportservice.getAgenciesByProductLineID(param.id,(data) => {
+        this.agencies=[];
+         this.sites=[];
                  for(var i=0; i<data.rows.length;i++){
                     this.agencies.push(data.rows.item(i));
                  }
@@ -194,6 +78,7 @@ export class ReportPage implements OnInit {
   }
 
    updateSites(param){
+     this.sites=[];
       this.reportservice.getSitesByAgencyID(param.id,(data) => {           
                  for(var i=0; i<data.rows.length;i++){
                     this.sites.push(data.rows.item(i));

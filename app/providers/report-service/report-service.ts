@@ -18,6 +18,7 @@ export class Report {
   constructor(title: string, site: string, agency: string, date: Date, id: number) {
     this.line = title;
     this.site = site;
+    this.date=date;
     this.agency = agency;
     this.id = id;
   }
@@ -37,14 +38,19 @@ export class ReportService extends DatabaseService {
             });
     }
     public addPASA(pasa, isSuccess, isError) {
-      console.log(pasa);
+      console.log(JSON.stringify(pasa));
         this.executeQuery(`INSERT INTO reports (id_product_line , id_agency ,
         id_site , id_author ,date,remonted_by ,id_function ,id_status ,type ,
         description , ent_pers_imp ,material_imp ,material ,type_report ,
-        company_name ,risque_qualification ,zone ,image ,action , solution,
+        company_name ,risque_qualification ,id_zone ,image ,action , solution,
         id_risk ,id_sub_risk)
          VALUES ( ? , ? ,? , ? ,?,? ,? ,? ,? ,? , ? ,? ,? ,? ,? ,? ,? ,? ,? , ? ,? ,?)`,
-            [pasa.line.id ,pasa.agency.id ,pasa.site.id ,pasa.author.id ,pasa.date,pasa.remonted_by ,pasa.fonction ,pasa.status ,pasa.type ,pasa.description ,pasa.ent_pers_imp ,pasa.material_imp ,pasa.material ,pasa.type_report ,pasa.company_name ,pasa.risque_qualification ,pasa.zone ,pasa.image ,pasa.action ,pasa.solution ,pasa.risk ,pasa.sub_risk],
+            [pasa.line.id ,pasa.agency.id ,pasa.site.id ,pasa.author.id ,
+            pasa.date,pasa.remonted_by ,pasa.fonction ,pasa.status.id ,pasa.type ,
+            pasa.description ,pasa.ent_pers_imp ,pasa.material_imp ,
+            pasa.material ,"PA/SA" ,pasa.company_name ,
+            pasa.risque_qualification ,pasa.zone ,pasa.image ,pasa.action ,
+            pasa.solution ,pasa.risk ,pasa.sub_risk],
             (data) => {
                 isSuccess(data);
                 
@@ -103,6 +109,18 @@ export class ReportService extends DatabaseService {
                 isError(error);
             });
     }
+
+    public getZones(isSuccess, isError) {
+        this.executeQuery("SELECT id,label FROM zones",
+            [],
+            (data) => {
+                isSuccess(data);
+                
+            }, (error) => {
+                isError(error);
+            });
+    }
+
     public getRisks(isSuccess, isError) {
         this.executeQuery("SELECT id,label FROM risks",
             [],
@@ -146,9 +164,21 @@ export class ReportService extends DatabaseService {
             });
     }
  
-   getAllReports() {
+   getAllReports(isSuccess) {
+       this.executeQuery(`SELECT r.id id,r.date date,s.label site, a.label agency,l.label line
+        FROM reports r,sites s,agencies a,product_lines l
+        where r.id_site=s.id
+        AND r.id_agency=a.id
+        AND r.id_product_line=l.id
+        `,[],
+            (data) => {
+                isSuccess(data);
+                
+            }, (error) => {
+                console.log("Error getting reports"+JSON.stringify(error));
+            });
    // this.executePromiseQuery("SELECT * FROM reports ORDER BY id DESC LIMIT 3",[]);
-    return this.storage.query('SELECT * FROM reports DESC LIMIT 10');
+    //return this.storage.query('SELECT * FROM reports DESC LIMIT 10');
   }
  
 }

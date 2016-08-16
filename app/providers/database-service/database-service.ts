@@ -19,7 +19,8 @@ protected storage: Storage;
         this.useLocalStorage();
       }
       else{//sqlite
-         this.useSqlite();
+        platform.ready().then(() => {this.useSqlite();});
+         
       }
   }
 
@@ -32,11 +33,12 @@ protected storage: Storage;
     this.devMode=false;
     this.database = new SQLite();
     this.database.openDatabase({ name: "data.db", location: "default" }).then(() => {
-      console.log("CONNECTED!")
+      console.log("CONNECTED!");
     }, (error) => {
       console.log("ERROR: ", error);
     });
   }
+  
   executeQuery(query,params,isSuccess,isError){
     if(this.devMode){
       this.storage.query(query,params).then((data) => {

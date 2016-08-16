@@ -11,7 +11,7 @@ import { ReportService, Report } from '../../providers/report-service/report-ser
   templateUrl: 'build/pages/home/home.html',
   pipes: [TranslatePipe]
 })
-export class HomePage {
+export class HomePage  implements OnInit{
   public user;
   reports: Report[];
   reportService;
@@ -25,43 +25,37 @@ export class HomePage {
     // Initialise the notes by loading data from our DB
   private loadReports() {
     this.reports = [];
-    this.reportService.getAllReports().then(
-      data => {
+    console.log("load reports");
+    this.reportService.getAllReports(
+      (data) => {
         this.reports = [];
-        if (data.res.rows.length > 0) {
-          for (var i = 0; i < data.res.rows.length; i++) {
-            let item = data.res.rows.item(i);
+        if (data.rows.length > 0) {
+          console.log(JSON.stringify(data.rows));
+          for (var i = 0; i < data.rows.length; i++) {
+            let item = data.rows.item(i);
             this.reports.push(new Report(item.line, item.site, item.agency,item.date, item.id));
           }
+           console.log(' Load reports ',this.reports );
         }
       });
-      console.log(' Load reports ',this.reports );
+     
       
   }
- 
+  ngOnInit() {
+    console.log('nginit');
+    
+   
+    
+  }
   onPageDidEnter (){
     console.log('onPageDidEnter');
-    //this.loadReports();
+    this.reports = [];
+      this.loadReports();
   }
   onPageLoaded() {
     console.log('onPageLoaded');
-    this.loadReports();
+    
   }
-  /*ngOnInit() {
-    this.reports=[
-            {
-              line: "ligne 1",
-              site:"site 1" ,
-              agency: "agency 1"
-            },
-            {
-              line: "ligne 2",
-              site:"site 2" ,
-              agency: "agency 2"
-            }
-            
-            ];
-  }*/
 
   doLogout() {
     this.loginservice.logout();

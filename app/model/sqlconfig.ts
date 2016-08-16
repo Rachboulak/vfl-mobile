@@ -18,6 +18,24 @@ static SQL_TABLES=[
           }
    ]
 },
+//table zones
+{
+   name:"zones",
+   create:`CREATE TABLE IF NOT EXISTS zones (id INTEGER PRIMARY KEY AUTOINCREMENT,
+    label TEXT, description TEXT)`,
+   lines:[
+          {
+              script:"INSERT INTO zones (label, description) VALUES (?, ?)",
+              params:["Casablanca", "Casablanca"]
+          },{
+              script:"INSERT INTO zones (label, description) VALUES (?, ?)",
+              params:["Rabat", "Rabat"]
+          } ,{
+              script:"INSERT INTO zones (label, description) VALUES (?, ?)",
+              params:["Tanger", "Tanger"]
+          }
+   ]
+},
 //table FUNCTIONS
 {
    name:"functions",
@@ -38,7 +56,7 @@ static SQL_TABLES=[
 },
 //table Status
 {
-   name:"functions",
+   name:"status",
    create:`CREATE TABLE IF NOT EXISTS status (id INTEGER PRIMARY KEY AUTOINCREMENT,
     label TEXT, description TEXT)`,
    lines:[
@@ -206,9 +224,9 @@ static SQL_TABLES=[
    name:"reports",
    create:`CREATE TABLE IF NOT EXISTS reports (id INTEGER PRIMARY KEY AUTOINCREMENT, id_product_line INTEGER,
     id_agency INTEGER,id_site INTEGER, id_author INTEGER,date DATE,remonted_by VARCHAR(100),
-    id_function INTEGER, id_status VARCHAR(100),type VARCHAR(100),description TEXT,
+    id_function INTEGER, id_status INTEGER,type VARCHAR(100),description TEXT,
      ent_pers_imp BOOLEAN,material_imp BOOLEAN,material TEXT,type_report VARCHAR(30),
-     company_name VARCHAR(100),risque_qualification VARCHAR(30),zone VARCHAR(100),
+     company_name VARCHAR(100),risque_qualification VARCHAR(30),id_zone INTEGER,
       image TEXT,action TEXT, solution TEXT,id_risk INTEGER,id_sub_risk INTEGER,
       CONSTRAINT fk_idlines FOREIGN KEY (id_product_line) REFERENCES product_lines(id),
       CONSTRAINT fk_IDagencies FOREIGN KEY (id_agency) REFERENCES agencies(id),
@@ -217,17 +235,18 @@ static SQL_TABLES=[
       CONSTRAINT fk_IDfunction FOREIGN KEY (id_function) REFERENCES functions(id),
       CONSTRAINT fk_Irisk FOREIGN KEY (id_risk) REFERENCES risks(id),
       CONSTRAINT fk_IDstatus FOREIGN KEY (id_status) REFERENCES status(id),
-      CONSTRAINT fk_IDsubrisk FOREIGN KEY (id_sub_risk) REFERENCES sub_risks(id))`,
+      CONSTRAINT fk_IDsubrisk FOREIGN KEY (id_sub_risk) REFERENCES sub_risks(id),
+      CONSTRAINT fk_IDzone FOREIGN KEY (id_zone) REFERENCES zones(id))`,
    lines:[
           {
               script:`INSERT INTO reports (id_product_line , id_agency ,id_site ,
                id_author ,date,remonted_by ,id_function ,id_status ,type ,description ,
                 ent_pers_imp ,material_imp ,material ,type_report ,company_name ,
-                risque_qualification ,zone ,image ,action , solution ,id_risk ,id_sub_risk)
+                risque_qualification ,id_zone ,image ,action , solution ,id_risk ,id_sub_risk)
                  VALUES ( ? , ? ,? , ? ,?,? ,? ,? ,? ,? , ? ,? ,? ,? ,? ,? ,? ,? ,? , ? ,? ,?)`,
 
               params:[1 ,1,1 ,1 ,'2013-02-03','remonted_by' ,1 ,1 ,'anomalie' ,
-              'description' , true ,true ,'material' ,'pasa' ,'company' ,'red' ,'zone1' ,
+              'description' , true ,true ,'material' ,'pasa' ,'company' ,'red' ,1 ,
               'image' ,'action' , 'solution' ,1 ,1]
           }
    ]

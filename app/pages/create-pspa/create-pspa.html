@@ -38,12 +38,11 @@
 
         <ion-item>
           <ion-label primary>Evénement remonté par:</ion-label>
-          <ion-input [(ngModel)]="pspa.remontedBy" ngControl="remontedBy" type="text" #remontedBy="ngForm" spellcheck="false" autocapitalize="off"
+          <ion-input [(ngModel)]="pspa.remonted_by" ngControl="remonted_by" type="text" #remonted_by="ngForm" spellcheck="false" autocapitalize="off"
             required>
           </ion-input>
-
         </ion-item>
-        <p [hidden]="remontedBy.valid || submitted == false" danger padding-left>
+        <p [hidden]="remonted_by.valid || submitted == false" danger padding-left>
           Le champ Evénement remonté par est obligatoire
         </p>
 
@@ -60,12 +59,22 @@
         <ion-item>
           <ion-label primary> Statut de la personne</ion-label>
           <ion-select [(ngModel)]="pspa.status" ngControl="status" #status="ngForm" required>
-            <ion-option *ngFor="let item of statues" [value]="item.id" [checked]="false">{{item.label}}</ion-option>
+            <ion-option *ngFor="let item of statues" [value]="item" [checked]="false">{{item.label}}</ion-option>
           </ion-select>
         </ion-item>
         <p [hidden]="status.valid || submitted == false" danger padding-left>
           Le champ Statut de la personne est obligatoire
         </p>
+
+        <ion-item [hidden]=" pspa.status==undefined || pspa.status.label == 'Lafarge'">
+          <ion-label primary>Nom de l'entreprise:</ion-label>
+          <ion-input [(ngModel)]="pspa.company_name" ngControl="company" type="text" #company="ngForm" spellcheck="false" autocapitalize="off">
+          </ion-input>
+        </ion-item>
+        <p [hidden]="company.valid || submitted == false " danger padding-left>
+          Le champ Nom de l'entreprise est obligatoire
+        </p>
+
         <ion-row responsive-sm>
           <ion-col>
             <button (click)="nextStep(pspaForm)" primary block><ion-icon name="arrow-forward"></ion-icon></button>
@@ -85,14 +94,32 @@
 
         <ion-item>
           <ion-label primary>Ent./Pers. impliquée</ion-label>
-          <ion-toggle [(ngModel)]="pspa.other"></ion-toggle>
+          <ion-toggle [(ngModel)]="pspa.ent_pers_imp"></ion-toggle>
         </ion-item>
 
         <ion-item>
           <ion-label primary>Matériel impliqué</ion-label>
-          <ion-toggle [(ngModel)]="pspa.material"></ion-toggle>
+          <ion-toggle [(ngModel)]="pspa.material_imp"></ion-toggle>
         </ion-item>
 
+        <ion-item [hidden]="pspa.material_imp == false">
+          <ion-label primary>Materiels:</ion-label>
+          <ion-input [(ngModel)]="pspa.material" ngControl="material" type="text" #material="ngForm" spellcheck="false" autocapitalize="off">
+          </ion-input>
+        </ion-item>
+        <p [hidden]="material.valid || submitted == false " danger padding-left>
+          Le champ Materiels sest obligatoire
+        </p>
+
+        <ion-item>
+          <ion-label primary> Zone</ion-label>
+          <ion-select [(ngModel)]="pspa.zone" ngControl="zone" #zone="ngForm" required>
+            <ion-option *ngFor="let zone of zones" [value]="zone.id" [checked]="false">{{zone.label}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <p [hidden]="zone.valid || submitted == false" danger padding-left>
+          Le champ Zone est obligatoire
+        </p>
         <ion-row responsive-sm>
           <ion-col>
             <button (click)="previousStep(pspaForm)" primary block><ion-icon name="arrow-back"></ion-icon></button>
@@ -190,7 +217,7 @@
 
 
 
-        
+
         <ion-row responsive-sm>
           <ion-col>
             <button (click)="previousStep(pspaForm)" primary block><ion-icon name="arrow-back"></ion-icon></button>
@@ -201,7 +228,7 @@
         </ion-row>
       </div>
 
-      <div *ngIf="step==8">
+      <div *ngIf="step==6">
         <ion-card>
           <ion-card-header>
             Ajouter des photos
@@ -209,7 +236,7 @@
           <ion-card-content>
             <button primary clear (click)="takePicture()"><ion-icon name="folder-open"></ion-icon>Prendre</button>
             <button primary clear (click)="uploadPicture()"><ion-icon name="camera"></ion-icon>Ouvrir</button>
-
+            
             <ion-list *ngIf="base64Images">
               <ion-list-header>
                 Images ajoutées
@@ -218,9 +245,14 @@
                 <img [src]="base64Image" />
               </ion-item>
             </ion-list>
-
-
-
+            <ion-row responsive-sm>
+              <ion-col>
+                <button (click)="previousStep(pspaForm)" primary block><ion-icon name="arrow-back"></ion-icon></button>
+              </ion-col>
+              <ion-col>
+                <button (click)="Done(pspaForm)" primary block><ion-icon name="done-all"></ion-icon>Valider</button>
+              </ion-col>
+            </ion-row>
 
           </ion-card-content>
         </ion-card>
