@@ -40,7 +40,11 @@ protected storage: Storage;
   }
   
   executeQuery(query,params,isSuccess,isError){
+    console.log('qury ', query);
+    console.log('qury this.devMode ', this.devMode);
     if(this.devMode){
+      console.log('qury storage');
+      
       this.storage.query(query,params).then((data) => {
             isSuccess(data.res);
         }, (error) => {
@@ -48,6 +52,7 @@ protected storage: Storage;
         });
     }
     else{
+      console.log('qury sqlite');
   this.database.executeSql(query, params).then((data) => {
       isSuccess(data);
 

@@ -30,7 +30,12 @@
         Mon compte
     </button>
   </ion-item>
-  <ion-item-divider light>Mes rapports</ion-item-divider>
+  <ion-item-divider light>Mes rapports
+    <button outline item-right (click)="goToReportListPage(user)">
+        <!--ion-icon name="more"></ion-icon-->
+        Afficher Plus
+    </button>
+  </ion-item-divider>
     <!--ion-item light>
       <div class="bar bar-header bar-stable">
         <h1 class="title">Mes rapports</h1>

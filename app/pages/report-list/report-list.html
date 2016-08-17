@@ -1,45 +1,52 @@
 <ion-header>
+
   <ion-navbar>
-    <button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Reports</ion-title>
+    <ion-title>Mes rapport</ion-title>
   </ion-navbar>
+<button *ngIf="showButton" (click)="scrollToTop(1000)">
+    Défiler vers le haut
+    <ion-icon name="ion-chevron-up"></ion-icon>
+  </button>
+<!-- Scroll Top -->   
 </ion-header>
 
-<ion-content class="outer-content report-list">
-  <ion-card *ngFor="let report of reports" class="report">
+<ion-navbar *navbar>
+    <ion-title>
+        Mes rapport *
+    </ion-title>
+</ion-navbar>
 
-    <ion-card-header>
-      <ion-item>
-        <!--ion-avatar item-left>
-          <img [src]="report.profilePic">
-        </ion-avatar-->
-        {{report.line}}
-      </ion-item>
-    </ion-card-header>
+<ion-content class="report-list">
+   
+    <!--ion-list [virtualScroll]="reports" approxItemHeight="50px">
+        <ion-item *virtualItem="#report">
+              <h2>{{report.id}}</h2>
+              <h3>Rapport PA/SA : {{report.line}} - {{report.agency}} - {{report.site}} </h3>
+              <p>Date : {{report.date}}</p>
+        </ion-item>
+    </ion-list-->
+    
+ <!--ion-list [virtualScroll]="reports">
 
-    <ion-card-content class="outer-content">
-      <ion-list>
-        <!--button ion-item *ngFor="let session of report.sessions" (click)="goToSessionDetail(session)">
-          <h3>{{session.name}}</h3>
-        </button-->
-        <button ion-item (click)="goToReportDetail(report)">
-          <h3>About {{report.line}}</h3>
-        </button>
-      </ion-list>
-    </ion-card-content>
+  <ion-item *virtualItem="let report">
+    {{ report.line }} {{ report.agency }}
+    <h3>Rapport PA/SA : {{report.line}} - {{report.agency}} - {{report.site}} </h3>
+  </ion-item-->
+  
+ <ion-list>
+   
+   <button ion-item *ngFor="let report of reports">
+     {{report.id}}
+        <h3>Rapport PA/SA : {{report.line}} - {{report.agency}} - {{report.site}} </h3>
+        <p>Line : {{report.line}}</p>
+        <p>Agence : {{report.agency}} </p>
+        <p>Site : {{report.site}} </p>
+        <p>Date : {{report.date}}</p>
+     </button>
+ </ion-list>
+ <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
 
-    <ion-item>
-      <!--button (click)="goToSpeakerTwitter(report)" clear item-left>
-        <ion-icon name="logo-twitter"></ion-icon>
-        Tweet
-      </button-->
-      <!--button (click)="openSpeakerShare(report)" clear item-right>
-        <ion-icon name="share"></ion-icon>
-        Share
-      </button-->
-    </ion-item>
 
-  </ion-card>
 </ion-content>

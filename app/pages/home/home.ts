@@ -4,6 +4,7 @@ import {TranslatePipe, TranslateService} from "ng2-translate/ng2-translate";
 import {LoginPage} from '../login/login';
 import {SearchPage} from "../search/search";
 import {ProfilePage} from "../profile/profile";
+import {ReportListPage} from "../report-list/report-list";
 import {ReportPage} from "../report/report";
 import {LoginService} from '../../providers/login-service/login-service';
 import { ReportService, Report } from '../../providers/report-service/report-service';
@@ -28,6 +29,7 @@ export class HomePage  implements OnInit{
     console.log("load reports");
     this.reportService.getAllReports(
       (data) => {
+         console.log("load reports", data);
         this.reports = [];
         if (data.rows.length > 0) {
           console.log(JSON.stringify(data.rows));
@@ -71,6 +73,12 @@ export class HomePage  implements OnInit{
     this.navCtrl.push(ReportPage,{user:this.user});
 
   }
+
+  goToReportListPage () {
+    this.navCtrl.push(ReportListPage,{user:this.user});
+
+  }
+
   goToAccountPage() {
     this.loginservice.getUser( (data) => {      
                     this.navCtrl.push(ProfilePage,{user:data.rows.item(0)});

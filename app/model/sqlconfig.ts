@@ -248,6 +248,56 @@ static SQL_TABLES=[
               params:[1 ,1,1 ,1 ,'2013-02-03','remonted_by' ,1 ,1 ,'anomalie' ,
               'description' , true ,true ,'material' ,'pasa' ,'company' ,'red' ,1 ,
               'image' ,'action' , 'solution' ,1 ,1]
+          },{
+              script:`INSERT INTO reports (id_product_line , id_agency ,id_site ,
+               id_author ,date,remonted_by ,id_function ,id_status ,type ,description ,
+                ent_pers_imp ,material_imp ,material ,type_report ,company_name ,
+                risque_qualification ,id_zone ,image ,action , solution ,id_risk ,id_sub_risk)
+                 VALUES ( ? , ? ,? , ? ,?,? ,? ,? ,? ,? , ? ,? ,? ,? ,? ,? ,? ,? ,? , ? ,? ,?)`,
+
+              params:[1 ,1,2 ,1 ,'2013-02-03','remonted_by' ,1 ,1 ,'anomalie' ,
+              'description' , true ,true ,'material' ,'pasa' ,'company' ,'red' ,1 ,
+              'image' ,'action' , 'solution' ,1 ,1]
+          },{
+              script:`INSERT INTO reports (id_product_line , id_agency ,id_site ,
+               id_author ,date,remonted_by ,id_function ,id_status ,type ,description ,
+                ent_pers_imp ,material_imp ,material ,type_report ,company_name ,
+                risque_qualification ,id_zone ,image ,action , solution ,id_risk ,id_sub_risk)
+                 VALUES ( ? , ? ,? , ? ,?,? ,? ,? ,? ,? , ? ,? ,? ,? ,? ,? ,? ,? ,? , ? ,? ,?)`,
+
+              params:[2 ,2,2 ,1 ,'2013-02-03','remonted_by' ,1 ,1 ,'anomalie' ,
+              'description' , true ,true ,'material' ,'pasa' ,'company' ,'red' ,1 ,
+              'image' ,'action' , 'solution' ,1 ,1]
+          },{
+              script:`INSERT INTO reports (id_product_line , id_agency ,id_site ,
+               id_author ,date,remonted_by ,id_function ,id_status ,type ,description ,
+                ent_pers_imp ,material_imp ,material ,type_report ,company_name ,
+                risque_qualification ,id_zone ,image ,action , solution ,id_risk ,id_sub_risk)
+                 VALUES ( ? , ? ,? , ? ,?,? ,? ,? ,? ,? , ? ,? ,? ,? ,? ,? ,? ,? ,? , ? ,? ,?)`,
+
+              params:[2 ,2,3 ,1 ,'2013-02-03','remonted_by' ,1 ,1 ,'anomalie' ,
+              'description' , true ,true ,'material' ,'pasa' ,'company' ,'red' ,1 ,
+              'image' ,'action' , 'solution' ,1 ,1]
+          },{
+              script:`INSERT INTO reports (id_product_line , id_agency ,id_site ,
+               id_author ,date,remonted_by ,id_function ,id_status ,type ,description ,
+                ent_pers_imp ,material_imp ,material ,type_report ,company_name ,
+                risque_qualification ,id_zone ,image ,action , solution ,id_risk ,id_sub_risk)
+                 VALUES ( ? , ? ,? , ? ,?,? ,? ,? ,? ,? , ? ,? ,? ,? ,? ,? ,? ,? ,? , ? ,? ,?)`,
+
+              params:[2 ,2,4 ,1 ,'2013-02-03','remonted_by' ,1 ,1 ,'anomalie' ,
+              'description' , true ,true ,'material' ,'pasa' ,'company' ,'red' ,1 ,
+              'image' ,'action' , 'solution' ,1 ,1]
+          },{
+              script:`INSERT INTO reports (id_product_line , id_agency ,id_site ,
+               id_author ,date,remonted_by ,id_function ,id_status ,type ,description ,
+                ent_pers_imp ,material_imp ,material ,type_report ,company_name ,
+                risque_qualification ,id_zone ,image ,action , solution ,id_risk ,id_sub_risk)
+                 VALUES ( ? , ? ,? , ? ,?,? ,? ,? ,? ,? , ? ,? ,? ,? ,? ,? ,? ,? ,? , ? ,? ,?)`,
+
+              params:[2 ,2,5 ,1 ,'2013-02-03','remonted_by' ,1 ,1 ,'anomalie' ,
+              'description' , true ,true ,'material' ,'pasa' ,'company' ,'red' ,1 ,
+              'image' ,'action' , 'solution' ,1 ,1]
           }
    ]
 }

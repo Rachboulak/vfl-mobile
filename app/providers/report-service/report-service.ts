@@ -178,7 +178,45 @@ export class ReportService extends DatabaseService {
                 console.log("Error getting reports"+JSON.stringify(error));
             });
    // this.executePromiseQuery("SELECT * FROM reports ORDER BY id DESC LIMIT 3",[]);
-    //return this.storage.query('SELECT * FROM reports DESC LIMIT 10');
+    // return this.storage.query('SELECT * FROM reports DESC LIMIT 10');
   }
  
+     getAll(isSuccess, isError){
+            this.executeQuery("SELECT * FROM reports DESC LIMIT 3",[],
+            (data) => {
+                isSuccess(data);
+                
+            }, (error) => {
+                isError(error);
+            });
+    }
+
+    load(start, end, isSuccess, isError) {
+    console.log('#####start = '+ start, '#####end = '+end);
+    //return this.storage.query('SELECT * FROM reports DESC LIMIT ' + start + ', ' + end);
+    this.executeQuery('SELECT r.id id,r.date date,s.label site, a.label agency,l.label line' +
+        ' FROM reports r,sites s,agencies a,product_lines l' +
+        ' where r.id_site=s.id AND r.id_agency=a.id'+
+        ' AND r.id_product_line=l.id'+
+        ' Limit '+start+' , '+end
+        ,[],
+            (data) => {
+                console.log("load getting reports"+JSON.stringify(data));
+                isSuccess(data);
+            }, (error) => {
+                console.log("load Error getting reports"+JSON.stringify(error));
+                isError(error);
+            });
+            
+  }
+        firstLoad(start, end) {
+    console.log('#####start = '+ start, '#####end = '+end);
+    //return this.storage.query('SELECT * FROM reports DESC LIMIT ' + start + ', ' + end);
+    return this.executePromiseQuery('SELECT r.id id,r.date date,s.label site, a.label agency,l.label line' +
+        ' FROM reports r,sites s,agencies a,product_lines l' +
+        ' where r.id_site=s.id AND r.id_agency=a.id'+
+        ' AND r.id_product_line=l.id'+
+        ' Limit '+start+' , '+end
+        ,[]);
+  }
 }
