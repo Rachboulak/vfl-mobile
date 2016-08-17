@@ -1,0 +1,103 @@
+<!--
+  Generated template for the ConsultReportPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>consult-report</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+<div padding-top text-center *ngIf="report">
+  <ion-slides *ngIf="base64Images" [options]="mySlideOptions">
+  <ion-slide *ngFor="let base64Image of base64Images">
+    <img style='height:200px' [src]="base64Image" />
+
+  </ion-slide>
+</ion-slides>
+    <ion-list inset>
+      <ion-item-divider light>Entete</ion-item-divider>
+      <button ion-item>
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Ligne Produit</td>
+            <td style="color:#666666;">{{report.line}}</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Agence/Secteur/Usine</td>
+            <td style="color:#666666;">{{report.agency}}</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Site</td>
+            <td style="color:#666666;">{{report.site}}</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Author</td>
+            <td style="color:#666666;">{{report.firstname}} {{report.lastname}}</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Date</td>
+            <td style="color:#666666;">{{report.date}}</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Evénement remonté par:</td>
+            <td style="color:#666666;">{{report.remonted_by}}</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Fonction</td>
+            <td style="color:#666666;">{{report.fonction}}</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Statut de la personne</td>
+            <td style="color:#666666;">{{report.status}}</td>
+          </tr>
+        </table>
+      </button>
+
+    </ion-list>
+  </div>
+
+  
+</ion-content>

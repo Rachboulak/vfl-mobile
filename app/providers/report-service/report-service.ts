@@ -165,17 +165,47 @@ export class ReportService extends DatabaseService {
     }
  
    getAllReports(isSuccess) {
-       this.executeQuery(`SELECT r.id id,r.date date,s.label site, a.label agency,l.label line
+       this.executeQuery(`SELECT r.*,r.created_on created_on, r.id id,r.date date,
+        s.label site, a.label agency,l.label line
         FROM reports r,sites s,agencies a,product_lines l
         where r.id_site=s.id
         AND r.id_agency=a.id
         AND r.id_product_line=l.id
+        ORDER BY created_on DESC LIMIT 3
         `,[],
             (data) => {
                 isSuccess(data);
                 
             }, (error) => {
-                console.log("Error getting reports"+JSON.stringify(error));
+                console.log("Error getting reports",error);
+            });
+   // this.executePromiseQuery("SELECT * FROM reports ORDER BY id DESC LIMIT 3",[]);
+    //return this.storage.query('SELECT * FROM reports DESC LIMIT 10');
+  }
+  getReportById(idReport,isSuccess) {
+       this.executeQuery(`SELECT r.*, r.id id,r.date date,
+        s.label site, a.label agency,l.label line,f.label fonction,
+        st.label status,u.*,risk.label risk,sr.label sub_risk,z.label zone
+
+        FROM reports r,sites s,agencies a,product_lines l,functions f,
+        status st,users u,risks risk,sub_risks sr,zones z
+
+        where r.id=?
+        AND r.id_site=s.id
+        AND r.id_agency=a.id
+        AND r.id_product_line=l.id
+        AND r.id_function=f.id
+        AND r.id_status=s.id
+        AND r.id_author=u.id
+        AND r.id_risk=risk.id
+        AND r.id_sub_risk=sr.id
+        AND r.id_zone=z.id
+        `,[idReport],
+            (data) => {
+                isSuccess(data);
+                
+            }, (error) => {
+                console.log("Error getting report by id",error);
             });
    // this.executePromiseQuery("SELECT * FROM reports ORDER BY id DESC LIMIT 3",[]);
     // return this.storage.query('SELECT * FROM reports DESC LIMIT 10');

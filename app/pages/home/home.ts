@@ -6,8 +6,10 @@ import {SearchPage} from "../search/search";
 import {ProfilePage} from "../profile/profile";
 import {ReportListPage} from "../report-list/report-list";
 import {ReportPage} from "../report/report";
+import {ConsultReportPage} from "../consult-report/consult-report";
 import {LoginService} from '../../providers/login-service/login-service';
 import { ReportService, Report } from '../../providers/report-service/report-service';
+
 @Component({
   templateUrl: 'build/pages/home/home.html',
   pipes: [TranslatePipe]
@@ -15,11 +17,8 @@ import { ReportService, Report } from '../../providers/report-service/report-ser
 export class HomePage  implements OnInit{
   public user;
   reports: Report[];
-  reportService;
   constructor(private navCtrl: NavController, private translate: TranslateService, private platform: Platform,private navparams:NavParams,private loginservice:LoginService,
-  reportService: ReportService) {
-    console.log('  HomePage constructor ');
-    this.reportService = reportService;
+  private reportService: ReportService) {
     this.user=this.navparams.get("user");    
   }
 
@@ -37,7 +36,7 @@ export class HomePage  implements OnInit{
             let item = data.rows.item(i);
             this.reports.push(new Report(item.line, item.site, item.agency,item.date, item.id));
           }
-           console.log(' Load reports ',this.reports );
+          // console.log(' Load reports ',this.reports );
         }
       });
      
@@ -90,6 +89,16 @@ export class HomePage  implements OnInit{
     //this.loginservice.dologin(user,this.nav);
     this.navCtrl.push(SearchPage);
 
+  }
+
+  consultReport(report){
+    console.log("consult report",report);
+    this.reportService.getReportById(report.id,
+      (data)=>{
+        console.log("heere!",data.rows.item(0));
+        this.navCtrl.push(ConsultReportPage,{report:data.rows.item(0)});
+      }
+    );
   }
   
 }

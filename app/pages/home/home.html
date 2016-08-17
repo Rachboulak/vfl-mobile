@@ -15,6 +15,7 @@
 
 
 <ion-content padding>
+  <ion-list>
     <ion-item>
       <ion-thumbnail item-left>
         <img src="img/user-1.jpeg">
@@ -22,7 +23,7 @@
       <!--ion-avatar item-left>
         <img src="img/fonts-header.png">
       </ion-avatar-->
-      <h2>Idir Idir</h2>
+      <h2>{{user.firstname}} {{user.username}}</h2>
       <p>{{user.username}}</p>
       <!--button clear item-right>View</button-->
       <button outline item-right (click)="goToAccountPage(user)">
@@ -42,22 +43,36 @@
       </div>
     </ion-item-->
     
-    <ion-card *ngFor="let report of reports" class="report">
-      <ion-list>
+    <ion-item-sliding  *ngFor="let report of reports">
+      <ion-item (click)="consultReport(report)">
+      
         <!--button ion-item *ngFor="let session of report.sessions" (click)="goToSessionDetail(session)">
           <h3>{{session.name}}</h3>
         </button-->
         <!--button ion-item (click)="goToReportDetail(report)"-->
-        <button ion-item>
-          <h3>Rapport PA/SA : {{report.line}} - {{report.agency}} - {{report.site}} </h3>
+        
+          <p style="font-size:medium;color:black">Rapport PA/SA : {{report.line}} - {{report.agency}} - {{report.site}} </p>
           <p>Date : {{report.date}}</p>
-        </button>
-      </ion-list>
+</ion-item>
+        
+    <ion-item-options side="right">
+      <button secondary>
+        <ion-icon name="create"></ion-icon>
+        Delete
+      </button>
+      <button danger>
+        <ion-icon name="trash"></ion-icon>
+        Update
+      </button>
+    </ion-item-options>
+  </ion-item-sliding>
+      
+      
 
        <!--ion-infinite-scroll (ionInfinite)="doInfinite($event)">
           <ion-infinite-scroll-content></ion-infinite-scroll-content>
         </ion-infinite-scroll-->
-  </ion-card>
+  </ion-list>
 
   <!--ion-img src="img/fonts-header.png" width="100%" height="auto"></ion-img-->
 
