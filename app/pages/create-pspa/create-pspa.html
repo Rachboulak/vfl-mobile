@@ -206,15 +206,15 @@
           Le champ Sous-risque est obligatoire
         </p>
         <ion-item>
-          <ion-range min="1" max="4" step="1" snaps="true" [(ngModel)]="pspa.risque_qualification" danger>
+          <ion-range primary min="1" max="4" step="1" snaps="true" (ionChange)="setRiskQualification()" [(ngModel)]="pspa.risque_qualification" >
             <ion-label secondary range-left>Faible</ion-label>
-            <ion-label range-right danger>Noir</ion-label>
+            <ion-label range-right dark>Noir</ion-label>
           </ion-range>
+         
         </ion-item>
-        <p primary *ngIf="pspa.risque_qualification">
-          <center>{{risque_qualifications[pspa.risque_qualification-1]}}</center>
+        <p [ngClass]="risque_qualification.class"  *ngIf="pspa.risque_qualification">
+          <center><b>{{risque_qualification.label}}</b></center>
         </p>
-
 
 
 

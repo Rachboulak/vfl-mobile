@@ -27,6 +27,7 @@ export class CreatePspaPage  implements OnInit {
     zones:any;
     subrisks:any;
     risque_qualifications:any;
+    risque_qualification:any;
  
   constructor(private nav: NavController, private translate: TranslateService,private navparams:NavParams,private reportservice:ReportService) {
 
@@ -68,14 +69,28 @@ previousStep(form){
     this.pspa.risque_qualification=1;
     this.pspa.material_imp=true;
     this.base64Images=[];
-    this.step=1;
+    this.step=5;
     this.statues=[];
     this.fonctions=[];
     this.subrisks=[];
     this.risks=[];
     this.zones=[];
-    this.risque_qualifications=["Faible","Jaune","Rouge","Noir"]
-
+    
+    this.risque_qualifications=[{
+        label:"Faible",
+        class:"low"
+        },{
+        label:"Jaune",
+        class:"yellow"
+        },{
+        label:"Rouge",
+        class:"red"
+        },{
+        label:"Noir",
+        class:"black"
+        }
+        ];
+        this.risque_qualification=this.risque_qualifications[0];
     //init statues
     this.reportservice.getStatues(
       (data) => {           
@@ -153,5 +168,8 @@ previousStep(form){
         }, (err) => {
             console.log(err);
         });
+  }
+  setRiskQualification(param){
+      this.risque_qualification=this.risque_qualifications[this.pspa.risque_qualification-1];
   }
 }
