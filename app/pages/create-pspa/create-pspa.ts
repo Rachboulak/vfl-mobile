@@ -47,7 +47,7 @@ Done(form){
         this.reportservice.addPASA(this.pspa,
           (data) => {
                 this.nav.pop(); 
-                console.log(this.pspa.risque_qualification)             
+                console.log("created pspa :",this.pspa)             
             }, (error) => {
                  console.log("error",error);
             });
@@ -67,9 +67,11 @@ previousStep(form){
     this.pspa.site=this.report.site;
     this.pspa.author=this.user;
     this.pspa.risque_qualification=1;
+    this.pspa.company_name=null;
+    this.pspa.material=null;
     this.pspa.material_imp=true;
     this.base64Images=[];
-    this.step=5;
+    this.step=1;
     this.statues=[];
     this.fonctions=[];
     this.subrisks=[];

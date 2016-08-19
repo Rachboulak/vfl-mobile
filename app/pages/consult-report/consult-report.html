@@ -15,19 +15,19 @@
 
 <ion-content padding>
 
-<div padding-top text-center *ngIf="report">
-  <ion-slides *ngIf="base64Images" [options]="mySlideOptions">
-  <ion-slide *ngFor="let base64Image of base64Images">
-    <img style='height:200px' [src]="base64Image" />
+  <div padding-top text-center *ngIf="report">
+    <ion-slides *ngIf="base64Images && step==3" [options]="mySlideOptions">
+      <ion-slide *ngFor="let base64Image of base64Images">
+        <img [src]="base64Image" />
 
-  </ion-slide>
-</ion-slides>
-    <ion-list inset>
-      <ion-item-divider light>Entete</ion-item-divider>
+      </ion-slide>
+    </ion-slides>
+    <ion-list inset *ngIf="step==1">
+
       <button ion-item>
         <table style="width:100%">
           <tr>
-            <td style="width:50%">Ligne Produit</td>
+            <td style="width:50%">Ligne Produit:</td>
             <td style="color:#666666;">{{report.line}}</td>
           </tr>
         </table>
@@ -36,7 +36,7 @@
       <button ion-item>
         <table style="width:100%">
           <tr>
-            <td style="width:50%">Agence/Secteur/Usine</td>
+            <td style="width:50%">Agence/Secteur/Usine:</td>
             <td style="color:#666666;">{{report.agency}}</td>
           </tr>
         </table>
@@ -45,7 +45,7 @@
       <button ion-item>
         <table style="width:100%">
           <tr>
-            <td style="width:50%">Site</td>
+            <td style="width:50%">Site:</td>
             <td style="color:#666666;">{{report.site}}</td>
           </tr>
         </table>
@@ -54,7 +54,7 @@
       <button ion-item>
         <table style="width:100%">
           <tr>
-            <td style="width:50%">Author</td>
+            <td style="width:50%">Autheur:</td>
             <td style="color:#666666;">{{report.firstname}} {{report.lastname}}</td>
           </tr>
         </table>
@@ -63,7 +63,7 @@
       <button ion-item>
         <table style="width:100%">
           <tr>
-            <td style="width:50%">Date</td>
+            <td style="width:50%">Date:</td>
             <td style="color:#666666;">{{report.date}}</td>
           </tr>
         </table>
@@ -81,7 +81,7 @@
       <button ion-item>
         <table style="width:100%">
           <tr>
-            <td style="width:50%">Fonction</td>
+            <td style="width:50%">Fonction:</td>
             <td style="color:#666666;">{{report.fonction}}</td>
           </tr>
         </table>
@@ -90,14 +90,147 @@
       <button ion-item>
         <table style="width:100%">
           <tr>
-            <td style="width:50%">Statut de la personne</td>
+            <td style="width:50%">Statut de la personne:</td>
             <td style="color:#666666;">{{report.status}}</td>
           </tr>
         </table>
       </button>
 
     </ion-list>
+    <ion-list inset *ngIf="step==2">
+
+      <button ion-item>
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Type:</td>
+            <td style="color:#666666;">{{report.type}}</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Description:</td>
+            <td>
+              <ion-item style="color:#666666;padding-left:0;margin-top:0;" no-lines text-wrap>
+                  {{report.description}}
+              </ion-item>
+            </td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Risque:</td>
+            <td style="color:#666666;">{{report.risk}}</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Sous-risque:</td>
+            <td style="color:#666666;">{{report.sub_risk}}</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Qualification du risque:</td>
+            <td style="color:#666666;">{{report.risque_qualification}}</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Zone:</td>
+            <td style="color:#666666;">{{report.zone}}</td>
+          </tr>
+        </table>
+      </button>
+
+
+      <button ion-item>
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Ent./Pers.impliquée:</td>
+            <td style="color:#666666;">
+              <ion-icon large secondary *ngIf="report.ent_pers_imp == 'true'" name="checkmark-circle"></ion-icon>
+              <ion-icon danger *ngIf="report.ent_pers_imp == 'false'" name="close-circle"></ion-icon>
+            </td>
+          </tr>
+        </table>
+        </button>
+
+      <button ion-item *ngIf="report.company_name != null ">
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Nom de l'entreprise:</td>
+            <td style="color:#666666;">{{report.company_name}}</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Matériel impliqué dans cet évenement:</td>
+            <td style="color:#666666;">
+              <ion-icon large secondary *ngIf="report.material_imp == 'true'" name="checkmark-circle"></ion-icon>
+              <ion-icon danger *ngIf="report.material_imp == 'false'" name="close-circle"></ion-icon>
+            </td>
+          </tr>
+        </table>
+      </button>
+
+
+      <button ion-item *ngIf="report.material != null">
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Matériels:</td>
+            <td style="color:#666666;">{{report.material}}</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Action immédiate:</td>
+            <td>
+              <ion-item style="color:#666666;padding-left:0;margin-top:0;" no-lines text-wrap>
+                  {{report.action}}
+              </ion-item>
+            </td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table style="width:100%">
+          <tr>
+            <td style="width:50%">Proposition de solution:</td>
+            <td>
+              <ion-item style="color:#666666;padding-left:0;margin-top:0;" no-lines text-wrap>
+                  {{report.solution}}
+              </ion-item>
+            </td>
+          </tr>
+        </table>
+      </button>
+
+
+
+    </ion-list>
   </div>
 
-  
+
 </ion-content>

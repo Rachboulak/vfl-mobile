@@ -14,8 +14,11 @@ export class ConsultReportPage {
   report:any;
   mySlideOptions:any;
   base64Images:any;
+  step:number;
   constructor(private nav: NavController, private translate: TranslateService,private navparams:NavParams) {
     this.report=this.navparams.get("report");
+    console.log(this.navparams.get("step"));
+    this.step=this.navparams.get("step");
     this.mySlideOptions = {
     initialSlide: 1,
     loop: false
