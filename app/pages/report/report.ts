@@ -42,7 +42,7 @@ export class ReportPage implements OnInit {
 
   addVFL(form){
     console.log(' addVFL form ', form);
-    this.submitted = true;
+    /*this.submitted = true;
     if (form.valid) {
         this.reportservice.addReport(this.report,
                   (data) => {           
@@ -56,7 +56,8 @@ export class ReportPage implements OnInit {
                 }, (error) => {
                     console.log("error",error);
                 });
-      }
+      }*/
+      
   }
 
   addPASA(form){

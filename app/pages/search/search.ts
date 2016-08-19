@@ -37,15 +37,18 @@ export class SearchPage implements OnInit {
   }
 
   getResults(form){
-     this.reportService.search(
-       new SearchReport(this.report.line.id, this.report.agency.id,this.report.site.id)
-       , (data) => {  
-              for(var i=0; i<data.rows.length;i++){
-                this.results.push(data.rows.item(i));
-              }
-        }, (error) => {
-              console.log("error",error);
-        });  
+    this.submitted = true;
+    if (form.valid) {
+      this.reportService.search(
+        new SearchReport(this.report.line.id, this.report.agency.id,this.report.site.id)
+        , (data) => {  
+                for(var i=0; i<data.rows.length;i++){
+                  this.results.push(data.rows.item(i));
+                }
+          }, (error) => {
+                console.log("error",error);
+          });  
+    }
   }
 
    updateAgencies(param){

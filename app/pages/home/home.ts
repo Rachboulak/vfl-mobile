@@ -109,7 +109,7 @@ export class HomePage  implements OnInit{
     );
   }
 
-  deleteReport(report){
+  /*deleteReport(report){
     console.log("delete report",report);
    
 
@@ -120,5 +120,5 @@ export class HomePage  implements OnInit{
         
       }
     );
-  }
+  }*/
 }

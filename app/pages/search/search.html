@@ -18,9 +18,6 @@
             <ion-option *ngFor="let line of lines" [value] = "line" [checked]="false">{{line.label}}</ion-option>
         </ion-select>
       </ion-item>
-      <p [hidden]="line.valid || submitted == false" danger padding-left>
-        line is required
-      </p>
 
       <ion-item>
         <ion-label primary> Agence/Secteur/Usine</ion-label>
@@ -28,10 +25,6 @@
           <ion-option *ngFor="let agency of agencies" [value] = "agency" [checked]="false">{{agency.label}}</ion-option>
         </ion-select>
       </ion-item>
-      <p [hidden]="agency.valid || submitted == false" danger padding-left>
-        Agence/Secteur/Usine is required
-      </p>
-
 
       <ion-item>
         <ion-label primary> Site</ion-label>
@@ -39,15 +32,15 @@
           <ion-option *ngFor="let site of sites" [value] = "site" [checked]="false">{{site.label}}</ion-option>
         </ion-select>
       </ion-item>
-      <p [hidden]="site.valid || submitted == false" danger padding-left>
-        Site is required
+
+      <p [hidden]="site.valid || submitted == false" padding-left>
+        Choisir une ligne de produit, une agence et un site
       </p>
 
       <ion-row responsive-sm>
         <ion-col>
           <center>  
-          <!--button (click)="getResults(searchForm)" primary block>Créer Rapport</button-->
-          <button clear (click)="getResults(searchForm)" ><ion-icon name="search"></ion-icon>Search</button>
+          <button outline (click)="getResults(searchForm)" ><ion-icon name="search"></ion-icon>Search</button>
           </center>        
         </ion-col>
       </ion-row>
@@ -64,55 +57,3 @@
   </ion-item>
 </ion-list>
 </ion-content>
-<!--ion-content padding  *ngIf="lines">
-  <ion-list>
-    {{searchForm}}
-    <form #searchForm="ngForm" novalidate>
-      <ion-item>
-        <ion-label primary> Ligne Produit</ion-label>
-        <ion-select [(ngModel)]="searchForm.line" ngControl="line" #line="ngForm" required (ionChange)="updateAgencies($event)">
-            <ion-option *ngFor="let line of lines" [value] = "line" [checked]="false">{{line.label}}</ion-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item>
-        <ion-label primary> Agence/Secteur/Usine</ion-label>
-        <ion-select [(ngModel)]="searchForm.agency" ngControl="agency" #agency="ngForm" (ionChange)="updateSites($event)" required>
-          <ion-option *ngFor="let agency of agencies" [value] = "agency" [checked]="false">{{agency.label}}</ion-option>
-        </ion-select>
-      </ion-item>
-
-
-      <ion-item>
-        <ion-label primary> Site</ion-label>
-        <ion-select [(ngModel)]="searchForm.site" ngControl="site" #site="ngForm" required>
-          <ion-option *ngFor="let site of sites" [value] = "site" [checked]="false">{{site.label}}</ion-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-row responsive-sm>
-        <ion-col>
-          <button (click)="getResults(searchForm)" primary block>Créer PA-SA</button>
-        </ion-col>
-      </ion-row>
-      
-    </form>
-
-      <ion-card-footer>
-          <center>  
-            <button clear (click)="getResults(searchForm)" ><ion-icon name="search"></ion-icon>Search</button>
-          </center>
-      </ion-card-footer>
-
-
-<ion-list>
-   <ion-list-header>
-    Results
-   </ion-list-header>
-  <ion-item *ngFor="let item of items" (click)="itemSelected(item)">
-    {{item}}
-  </ion-item>
-</ion-list>
-  </ion-list>
-
-</ion-content-->
