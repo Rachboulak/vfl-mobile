@@ -208,15 +208,15 @@
         <p [hidden]="sub_risk.valid || submitted == false" danger padding-left>
           Le champ Sous-risque est obligatoire
         </p>
+
         <ion-item>
-          <ion-range primary min="1" max="4" step="1" snaps="true" (ionChange)="setRiskQualification()" [(ngModel)]="pspa.risque_qualification" >
-            <ion-label secondary range-left>Faible</ion-label>
-            <ion-label range-right dark>Noir</ion-label>
-          </ion-range>
-         
+          <ion-label primary> Qualification du risque</ion-label>
+          <ion-select [(ngModel)]="pspa.risque_qualification" ngControl="risque_qualification" #risque_qualification="ngForm" required>
+            <ion-option *ngFor="let rq of risque_qualifications" [value]="rq.label" [checked]="false">{{rq.label}}</ion-option>
+          </ion-select>
         </ion-item>
-        <p [ngClass]="risque_qualification.class"  *ngIf="pspa.risque_qualification">
-          <center><b>{{risque_qualification.label}}</b></center>
+        <p [hidden]="sub_risk.valid || submitted == false" danger padding-left>
+          Le champ Qualification du risque est obligatoire
         </p>
 
 

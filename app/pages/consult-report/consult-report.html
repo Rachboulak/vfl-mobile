@@ -16,10 +16,11 @@
 <ion-content padding>
 
   <div padding-top text-center *ngIf="report">
-    <ion-slides *ngIf="base64Images && step==3" [options]="mySlideOptions">
+ 
+    
+    <ion-slides *ngIf="base64Images && step==3" [options]="mySlideOptions" pager>
       <ion-slide *ngFor="let base64Image of base64Images">
-        <img [src]="base64Image" />
-
+        <img [src]="base64Image"  class="slide-image"/>
       </ion-slide>
     </ion-slides>
     <ion-list inset *ngIf="step==1">
