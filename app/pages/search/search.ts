@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController ,NavParams} from 'ionic-angular';
 import {TranslatePipe, TranslateService, Parser} from "ng2-translate/ng2-translate";
 import {ReportService, Report, SearchReport} from '../../providers/report-service/report-service';
-import {ConsultReportPage} from "../consult-report/consult-report";
+import {ConsultReportTabsPage} from "../consult-report-tabs/consult-report-tabs";
 
 @Component({
   templateUrl: 'build/pages/search/search.html',
@@ -18,7 +18,7 @@ export class SearchPage implements OnInit {
     public results : Report[];
   constructor(private navCtrl: NavController,
            private translate: TranslateService,private navparams:NavParams,
-           private reportservice: ReportService) {
+           private reportService: ReportService) {
   }
  
   ngOnInit() {
@@ -26,7 +26,7 @@ export class SearchPage implements OnInit {
     this.agencies=[];
     this.lines=[];
     this.results=[];
-    this.reportservice.getProductLines(
+    this.reportService.getProductLines(
           (data) => {           
                  for(var i=0; i<data.rows.length;i++){
                     this.lines.push(data.rows.item(i));
@@ -37,7 +37,7 @@ export class SearchPage implements OnInit {
   }
 
   getResults(form){
-     this.reportservice.search(
+     this.reportService.search(
        new SearchReport(this.report.line.id, this.report.agency.id,this.report.site.id)
        , (data) => {  
               for(var i=0; i<data.rows.length;i++){
@@ -49,7 +49,7 @@ export class SearchPage implements OnInit {
   }
 
    updateAgencies(param){
-      this.reportservice.getAgenciesByProductLineID(param.id,(data) => {
+      this.reportService.getAgenciesByProductLineID(param.id,(data) => {
         this.agencies=[];
          this.sites=[];
                  for(var i=0; i<data.rows.length;i++){
@@ -62,7 +62,7 @@ export class SearchPage implements OnInit {
 
    updateSites(param){
      this.sites=[];
-      this.reportservice.getSitesByAgencyID(param.id,(data) => {           
+      this.reportService.getSitesByAgencyID(param.id,(data) => {           
                  for(var i=0; i<data.rows.length;i++){
                     this.sites.push(data.rows.item(i));
                  }
@@ -71,11 +71,12 @@ export class SearchPage implements OnInit {
             });
   }
 
-    consultReport(report){
-    this.reportservice.getReportById(report.id,
+
+  consultReport(report){
+    this.reportService.getReportById(report.id,
       (data)=>{
-        this.navCtrl.push(ConsultReportPage,{report:data.rows.item(0)});
+        this.navCtrl.push(ConsultReportTabsPage,{report:data.rows.item(0)});
       }
     );
-  }
+  }  
 }

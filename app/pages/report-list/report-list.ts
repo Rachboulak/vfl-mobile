@@ -1,9 +1,7 @@
 import { Component, OnInit, ElementRef} from '@angular/core';
-
 import { NavController, NavParams, Page } from 'ionic-angular';
-
 import { ReportService, Report } from '../../providers/report-service/report-service';
-//import { ReportDetailPage } from '../report-detail/report-detail';
+import {ConsultReportTabsPage} from "../consult-report-tabs/consult-report-tabs";
 
 
 @Component({
@@ -86,5 +84,13 @@ export class ReportListPage implements OnInit {
           clearInterval(scrollInterval);
         }
     }, 15);
+  }
+
+  consultReport(report){
+    this.reportService.getReportById(report.id,
+      (data)=>{
+        this.navCtrl.push(ConsultReportTabsPage,{report:data.rows.item(0)});
+      }
+    );
   }
 }

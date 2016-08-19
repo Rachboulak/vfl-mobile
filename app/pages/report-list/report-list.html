@@ -35,7 +35,7 @@
   
  <ion-list>
    
-   <button ion-item *ngFor="let report of reports">
+      <button ion-item *ngFor="let report of reports" (click)="consultReport(report)">
         <h3>Rapport PA/SA : {{report.line}} - {{report.agency}} - {{report.site}} </h3>
         <p>Date : {{report.date}}</p>
      </button>

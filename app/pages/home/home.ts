@@ -9,7 +9,7 @@ import {ConsultReportPage} from "../consult-report/consult-report";
 import {ConsultReportTabsPage} from "../consult-report-tabs/consult-report-tabs";
 import {LoginService} from '../../providers/login-service/login-service';
 import { ReportService, Report } from '../../providers/report-service/report-service';
-
+import {ReportListPage} from "../report-list/report-list";
 
 @Component({
   templateUrl: 'build/pages/home/home.html',
@@ -48,6 +48,11 @@ export class HomePage  implements OnInit{
    
     
   }
+
+  goToReportListPage () {
+    this.navCtrl.push(ReportListPage,{user:this.user});
+  }
+    
   onPageDidEnter (){
     console.log('onPageDidEnter');
     this.reports = [];
