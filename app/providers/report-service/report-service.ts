@@ -213,6 +213,21 @@ export class ReportService extends DatabaseService {
    // this.executePromiseQuery("SELECT * FROM reports ORDER BY id DESC LIMIT 3",[]);
     // return this.storage.query('SELECT * FROM reports DESC LIMIT 10');
   }
+
+  DeleteReportById(idReport,isSuccess) {
+      console.log("idreport:",idReport);
+       this.executeQuery(`Delete FROM reports where id=?;`,
+       [idReport],
+            (data) => {
+                isSuccess(data);
+                
+            }, (error) => {
+                console.log("Error deleting report by id",error);
+            });
+   // this.executePromiseQuery("SELECT * FROM reports ORDER BY id DESC LIMIT 3",[]);
+    // return this.storage.query('SELECT * FROM reports DESC LIMIT 10');
+  }
+  
  
      getAll(isSuccess, isError){
             this.executeQuery("SELECT * FROM reports DESC LIMIT 3",[],

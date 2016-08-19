@@ -56,13 +56,14 @@
 </ion-item>
         
     <ion-item-options side="right">
-      <button secondary>
+      <button secondary (click)="updateReport(report)">
         <ion-icon name="create"></ion-icon>
-        Delete
+         Update
+
       </button>
-      <button danger>
+      <button danger (click)="deleteReport(report)">
         <ion-icon name="trash"></ion-icon>
-        Update
+        Delete
       </button>
     </ion-item-options>
   </ion-item-sliding>

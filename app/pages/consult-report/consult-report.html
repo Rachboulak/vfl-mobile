@@ -143,7 +143,7 @@
         <table style="width:100%">
           <tr>
             <td style="width:50%">Qualification du risque:</td>
-            <td style="color:#666666;">{{report.risque_qualification}}</td>
+            <td [ngClass]="risque_qualification.class" >{{risque_qualification.label}}</td>
           </tr>
         </table>
       </button>
