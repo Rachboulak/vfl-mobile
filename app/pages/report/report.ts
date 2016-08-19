@@ -41,6 +41,7 @@ export class ReportPage implements OnInit {
   }
 
   addVFL(form){
+    console.log(' addVFL form ', form);
     this.submitted = true;
     if (form.valid) {
         this.reportservice.addReport(this.report,
@@ -59,6 +60,7 @@ export class ReportPage implements OnInit {
   }
 
   addPASA(form){
+    console.log(' addPASA form ', form);
     this.submitted = true;
     if (form.valid) {  
       this.nav.push(CreatePspaPage, { report: this.report ,user:this.user});

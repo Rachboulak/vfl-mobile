@@ -24,6 +24,17 @@ export class Report {
   }
 }
 
+export class SearchReport {
+  line: number;
+  agency: number;
+  site: number;
+  constructor(title: number, agency: number, site: number) {
+    this.line = title;
+    this.agency = agency;
+    this.site = site;
+  }
+}
+
 export class ReportService extends DatabaseService {
 
 
@@ -223,7 +234,6 @@ export class ReportService extends DatabaseService {
 
     load(start, end, isSuccess, isError) {
     console.log('#####start = '+ start, '#####end = '+end);
-    //return this.storage.query('SELECT * FROM reports DESC LIMIT ' + start + ', ' + end);
     this.executeQuery('SELECT r.id id,r.date date,s.label site, a.label agency,l.label line' +
         ' FROM reports r,sites s,agencies a,product_lines l' +
         ' where r.id_site=s.id AND r.id_agency=a.id'+
@@ -239,14 +249,24 @@ export class ReportService extends DatabaseService {
             });
             
   }
-        firstLoad(start, end) {
-    console.log('#####start = '+ start, '#####end = '+end);
-    //return this.storage.query('SELECT * FROM reports DESC LIMIT ' + start + ', ' + end);
-    return this.executePromiseQuery('SELECT r.id id,r.date date,s.label site, a.label agency,l.label line' +
+
+    search(form : SearchReport, isSuccess, isError) {
+    console.log('#####search form = ','#line = ' + form.line, '#agency = ' + form.agency,
+    '#site = ' + form.site);
+    this.executeQuery('SELECT r.id id,r.date date,s.label site, a.label agency,l.label line' +
         ' FROM reports r,sites s,agencies a,product_lines l' +
         ' where r.id_site=s.id AND r.id_agency=a.id'+
-        ' AND r.id_product_line=l.id'+
-        ' Limit '+start+' , '+end
-        ,[]);
+        ' AND l.id=?'+
+        ' AND a.id=?'+
+        ' AND s.id=?'
+        ,[form.line, form.agency, form.site],
+            (data) => {
+                console.log("load getting reports"+JSON.stringify(data));
+                isSuccess(data);
+            }, (error) => {
+                console.log("load Error getting reports"+JSON.stringify(error));
+                isError(error);
+            });
+            
   }
 }

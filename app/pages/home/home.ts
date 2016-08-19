@@ -86,7 +86,6 @@ export class HomePage  implements OnInit{
             });
   }
   goToSearchPage() {
-    //this.loginservice.dologin(user,this.nav);
     this.navCtrl.push(SearchPage);
 
   }

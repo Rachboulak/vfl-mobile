@@ -36,11 +36,7 @@
  <ion-list>
    
    <button ion-item *ngFor="let report of reports">
-     {{report.id}}
         <h3>Rapport PA/SA : {{report.line}} - {{report.agency}} - {{report.site}} </h3>
-        <p>Line : {{report.line}}</p>
-        <p>Agence : {{report.agency}} </p>
-        <p>Site : {{report.site}} </p>
         <p>Date : {{report.date}}</p>
      </button>
  </ion-list>
