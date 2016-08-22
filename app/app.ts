@@ -42,9 +42,10 @@ export class MyApp {
   }
 useSqlite(){
   this.database = new SQLite();
+  console.log("heeeere!");
   var tables=SQLConfig.SQL_TABLES;
       this.database.openDatabase({
-        name: "data.db",
+        name: "data1.db",
         location: "default"
       }).then(() => {
         console.log("------------------Creating tables-------------------");
@@ -56,7 +57,7 @@ useSqlite(){
                               this.database.executeSql(line.script, line.params).then((data) => {
                                     console.log("INSERTED in: "+table.name+" " + JSON.stringify(data));
                                   }, (error) => {
-                                    console.log("ERROR: "+table.name+" "+line.script+" \n" + JSON.stringify(error.err));
+                                    console.log("ERROR insert: "+table.name+" "+line.script+" \n" + JSON.stringify(error.err));
                                   });
                           }
                     }, (error) => {
@@ -64,7 +65,7 @@ useSqlite(){
                     });
               }
       }, (error) => {
-        console.error("Unable to open database", error);
+        console.error("Unable to open database", JSON.stringify(error.err));
       });
 }
 useLocalStorage(){

@@ -38,7 +38,8 @@
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard",
     "cordova.plugins.diagnostic.api-22",
-    "cordova-plugin-camera"
+    "cordova-plugin-camera",
+    "cordova-sqlite-storage"
   ],
   "cordovaPlatforms": []
 }

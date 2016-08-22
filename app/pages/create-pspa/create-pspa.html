@@ -77,9 +77,9 @@
 
         <ion-row responsive-sm>
           <ion-col>
-          	<center>              
-            <button (click)="nextStep(pspaForm)" light><ion-icon name="arrow-forward"></ion-icon></button>
-           </center>      
+            <center>
+              <button (click)="nextStep(pspaForm)" light><ion-icon name="arrow-forward"></ion-icon></button>
+            </center>
           </ion-col>
         </ion-row>
       </div>
@@ -124,10 +124,10 @@
         </p>
         <ion-row responsive-sm>
           <ion-col>
-            <center>              
-            <button (click)="previousStep(pspaForm)" light><ion-icon name="arrow-back"></ion-icon></button>
-            <button (click)="nextStep(pspaForm)" light><ion-icon name="arrow-forward"></ion-icon></button>
-            </center>      
+            <center>
+              <button (click)="previousStep(pspaForm)" light><ion-icon name="arrow-back"></ion-icon></button>
+              <button (click)="nextStep(pspaForm)" light><ion-icon name="arrow-forward"></ion-icon></button>
+            </center>
           </ion-col>
         </ion-row>
       </div>
@@ -146,11 +146,11 @@
 
         <ion-row responsive-sm>
           <ion-col>
-          <center>              
-            <button (click)="previousStep(pspaForm)" light><ion-icon name="arrow-back"></ion-icon></button>
+            <center>
+              <button (click)="previousStep(pspaForm)" light><ion-icon name="arrow-back"></ion-icon></button>
 
-            <button (click)="nextStep(pspaForm)" light><ion-icon name="arrow-forward"></ion-icon></button>
-          </center>      
+              <button (click)="nextStep(pspaForm)" light><ion-icon name="arrow-forward"></ion-icon></button>
+            </center>
           </ion-col>
         </ion-row>
       </div>
@@ -181,10 +181,10 @@
 
         <ion-row responsive-sm>
           <ion-col>
-            <center>              
-            <button (click)="previousStep(pspaForm)" light><ion-icon name="arrow-back"></ion-icon></button>
-            <button (click)="nextStep(pspaForm)" light><ion-icon name="arrow-forward"></ion-icon></button>
-           </center>      
+            <center>
+              <button (click)="previousStep(pspaForm)" light><ion-icon name="arrow-back"></ion-icon></button>
+              <button (click)="nextStep(pspaForm)" light><ion-icon name="arrow-forward"></ion-icon></button>
+            </center>
           </ion-col>
         </ion-row>
       </div>
@@ -223,10 +223,10 @@
 
         <ion-row responsive-sm>
           <ion-col>
-          <center>              
-            <button (click)="previousStep(pspaForm)" light><ion-icon name="arrow-back"></ion-icon></button>
-            <button (click)="nextStep(pspaForm)" light><ion-icon name="arrow-forward"></ion-icon></button>
-          </center>      
+            <center>
+              <button (click)="previousStep(pspaForm)" light><ion-icon name="arrow-back"></ion-icon></button>
+              <button (click)="nextStep(pspaForm)" light><ion-icon name="arrow-forward"></ion-icon></button>
+            </center>
           </ion-col>
         </ion-row>
       </div>
@@ -237,23 +237,31 @@
             Ajouter des photos
           </ion-card-header>
           <ion-card-content>
+
             <button primary clear (click)="takePicture()"><ion-icon name="camera"></ion-icon>Prendre</button>
             <button primary clear (click)="uploadPicture()"><ion-icon name="folder-open"></ion-icon>Ouvrir</button>
-            
+
             <ion-list *ngIf="base64Images">
               <ion-list-header>
                 Images ajoutées
               </ion-list-header>
-              <ion-item *ngFor="let base64Image of base64Images">
-                <img [src]="base64Image" />
+              <ion-item>
+                <div padding-top text-center *ngIf="report">
+                  <ion-slides #mySlider [options]="mySlideOptions" pager>
+                    <ion-slide *ngFor="let base64Image of base64Images">
+                      <button primary clear (click)="removePicture(base64Image)" style="float: right;margin-bottom:-20%;"><ion-icon name="trash"></ion-icon></button>
+                      <img [src]="base64Image" class="center-image" />                      
+                    </ion-slide>
+                  </ion-slides>
+                </div>
               </ion-item>
             </ion-list>
             <ion-row responsive-sm>
               <ion-col>
-                <center>                  
+                <center>
                   <button (click)="previousStep(pspaForm)" light><ion-icon name="arrow-back"></ion-icon></button>
                   <button (click)="Done(pspaForm)" primary><ion-icon name="done-all"></ion-icon>Valider</button>
-                </center>      
+                </center>
               </ion-col>
             </ion-row>
 

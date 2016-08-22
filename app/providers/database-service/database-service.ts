@@ -32,10 +32,10 @@ protected storage: Storage;
   useSqlite(){
     this.devMode=false;
     this.database = new SQLite();
-    this.database.openDatabase({ name: "data.db", location: "default" }).then(() => {
+    this.database.openDatabase({ name: "data1.db", location: "default" }).then(() => {
       console.log("CONNECTED!");
     }, (error) => {
-      console.log("ERROR: ", error);
+      console.log("ERROR: ", JSON.stringify(error.err));
     });
   }
   
