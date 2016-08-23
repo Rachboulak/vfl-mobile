@@ -15,220 +15,231 @@
 
 <ion-content padding>
 
-  <div padding-top text-center *ngIf="report">
- 
-    
+  <div padding-top *ngIf="report">
+
+
     <ion-slides *ngIf="base64Images && step==3" [options]="mySlideOptions" pager>
       <ion-slide *ngFor="let base64Image of base64Images">
-        <img [src]="base64Image"  class="slide-image"/>
+        <img [src]="base64Image" class="slide-image" />
       </ion-slide>
     </ion-slides>
     <ion-list inset *ngIf="step==1">
 
-      <button ion-item>
-        <table style="width:100%">
-          <tr>
-            <td style="width:50%">Ligne Produit:</td>
-            <td style="color:#666666;">{{report.line}}</td>
-          </tr>
-        </table>
+
+      <button text-wrap ion-item>
+       <ion-grid>
+        <ion-row text-wrap >
+              <ion-col class="blue" width-33>Ligne Produit:</ion-col>
+              <ion-col style="color:#666666;">{{report.line}}</ion-col>
+        </ion-row>
+      </ion-grid>
       </button>
 
-      <button ion-item>
-        <table style="width:100%">
-          <tr>
-            <td style="width:50%">Agence/Secteur/Usine:</td>
-            <td style="color:#666666;">{{report.agency}}</td>
-          </tr>
-        </table>
+      <button text-wrap ion-item>
+       <ion-grid>
+        <ion-row text-wrap >
+              <ion-col class="blue" width-33>Agence/ Secteur/ Usine:</ion-col>
+              <ion-col style="color:#666666;">{{report.agency}}</ion-col>
+        </ion-row>
+       </ion-grid>
       </button>
 
-      <button ion-item>
-        <table style="width:100%">
-          <tr>
-            <td style="width:50%">Site:</td>
-            <td style="color:#666666;">{{report.site}}</td>
-          </tr>
-        </table>
+      <button text-wrap ion-item>
+       <ion-grid>
+        <ion-row text-wrap >
+              <ion-col class="blue" width-33>Site:</ion-col>
+              <ion-col style="color:#666666;">{{report.site}}</ion-col>
+        </ion-row>
+       </ion-grid>
       </button>
 
-      <button ion-item>
-        <table style="width:100%">
-          <tr>
-            <td style="width:50%">Autheur:</td>
-            <td style="color:#666666;">{{report.firstname}} {{report.lastname}}</td>
-          </tr>
-        </table>
+
+      <button text-wrap ion-item>
+       <ion-grid>
+        <ion-row text-wrap >
+              <ion-col class="blue" width-33>Autheur:</ion-col>
+              <ion-col style="color:#666666;">{{report.firstname}} {{report.lastname}}</ion-col>
+        </ion-row>
+       </ion-grid>
       </button>
 
-      <button ion-item>
-        <table style="width:100%">
-          <tr>
-            <td style="width:50%">Date:</td>
-            <td style="color:#666666;">{{report.date}}</td>
-          </tr>
-        </table>
+
+      <button text-wrap ion-item>
+       <ion-grid>
+        <ion-row text-wrap >
+              <ion-col class="blue" width-33>Date:</ion-col>
+              <ion-col style="color:#666666;">{{report.date}}</ion-col>
+        </ion-row>
+       </ion-grid>
       </button>
 
-      <button ion-item>
-        <table style="width:100%">
-          <tr>
-            <td style="width:50%">Evénement remonté par:</td>
-            <td style="color:#666666;">{{report.remonted_by}}</td>
-          </tr>
-        </table>
+      <button text-wrap ion-item>
+       <ion-grid>
+        <ion-row text-wrap  responsive-sm>
+              <ion-col class="blue" width-33>Evénement remonté par:</ion-col>
+              <ion-col style="color:#666666;">{{report.remonted_by}}</ion-col>
+        </ion-row>
+       </ion-grid>
       </button>
 
-      <button ion-item>
-        <table style="width:100%">
-          <tr>
-            <td style="width:50%">Fonction:</td>
-            <td style="color:#666666;">{{report.fonction}}</td>
-          </tr>
-        </table>
+
+      <button text-wrap ion-item>
+       <ion-grid>
+        <ion-row text-wrap >
+              <ion-col class="blue" width-33>Fonction:</ion-col>
+              <ion-col style="color:#666666;">{{report.fonction}}</ion-col>
+        </ion-row>
+       </ion-grid>
       </button>
 
-      <button ion-item>
-        <table style="width:100%">
-          <tr>
-            <td style="width:50%">Statut de la personne:</td>
-            <td style="color:#666666;">{{report.status}}</td>
-          </tr>
-        </table>
+      <button text-wrap ion-item>
+       <ion-grid>
+        <ion-row text-wrap  responsive-sm>
+              <ion-col class="blue" width-33>Statut de la personne:</ion-col>
+              <ion-col style="color:#666666;">{{report.status}}</ion-col>
+        </ion-row>
+       </ion-grid>
       </button>
 
     </ion-list>
     <ion-list inset *ngIf="step==2">
 
-      <button ion-item>
-        <table style="width:100%">
-          <tr>
-            <td style="width:50%">Type:</td>
-            <td style="color:#666666;">{{report.type}}</td>
-          </tr>
-        </table>
+      <button text-wrap ion-item>
+       <ion-grid>
+        <ion-row text-wrap >
+              <ion-col class="blue" width-33>Type:</ion-col>
+              <ion-col style="color:#666666;">{{report.type}}</ion-col>
+        </ion-row>
+       </ion-grid>
       </button>
 
-      <button ion-item>
-        <table style="width:100%">
-          <tr>
-            <td style="width:50%">Description:</td>
-            <td>
-              <ion-item style="color:#666666;padding-left:0;margin-top:0;" no-lines text-wrap>
-                  {{report.description}}
-              </ion-item>
-            </td>
-          </tr>
-        </table>
+      <p text-wrap ion-item>
+        <ion-grid>
+          <ion-row text-wrap responsive-sm>
+            <ion-col class="blue" width-33>Description:</ion-col>
+            <ion-col style="color:#666666;" *ngIf="more.description == false">
+              {{report.description.substring(0,60)+"..."}}
+              <button clear (click)="showMore('description')"><ion-icon name="arrow-dropdown-circle"></ion-icon></button>
+            </ion-col>
+            <ion-col style="color:#666666;" *ngIf="more.description == true">
+              {{report.description}}
+              <button clear (click)="hideMore('description')"><ion-icon name="arrow-dropup-circle"></ion-icon></button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </p>
+
+      <button text-wrap ion-item>
+       <ion-grid>
+        <ion-row text-wrap >
+              <ion-col class="blue" width-33>Risque:</ion-col>
+              <ion-col style="color:#666666;">{{report.risk}}</ion-col>
+        </ion-row>
+       </ion-grid>
       </button>
 
-      <button ion-item>
-        <table style="width:100%">
-          <tr>
-            <td style="width:50%">Risque:</td>
-            <td style="color:#666666;">{{report.risk}}</td>
-          </tr>
-        </table>
+      <button text-wrap ion-item>
+       <ion-grid>
+        <ion-row text-wrap >
+              <ion-col class="blue" width-33>Sous-risque:</ion-col>
+              <ion-col style="color:#666666;">{{report.sub_risk}}</ion-col>
+        </ion-row>
+       </ion-grid>
       </button>
 
-      <button ion-item>
-        <table style="width:100%">
-          <tr>
-            <td style="width:50%">Sous-risque:</td>
-            <td style="color:#666666;">{{report.sub_risk}}</td>
-          </tr>
-        </table>
+      <button text-wrap ion-item>
+       <ion-grid>
+        <ion-row text-wrap  responsive-sm>
+              <ion-col class="blue" width-33>Qualification du risque:</ion-col>
+              <ion-col style="color:#666666;">{{report.risque_qualification}}</ion-col>
+        </ion-row>
+       </ion-grid>
       </button>
 
-      <button ion-item>
-        <table style="width:100%">
-          <tr>
-            <td style="width:50%">Qualification du risque:</td>
-            <td style="color:#666666;">{{report.risque_qualification}}</td>
-          </tr>
-        </table>
-      </button>
-
-      <button ion-item>
-        <table style="width:100%">
-          <tr>
-            <td style="width:50%">Zone:</td>
-            <td style="color:#666666;">{{report.zone}}</td>
-          </tr>
-        </table>
-      </button>
-
-
-      <button ion-item>
-        <table style="width:100%">
-          <tr>
-            <td style="width:50%">Ent./Pers.impliquée:</td>
-            <td style="color:#666666;">
-              <ion-icon large secondary *ngIf="report.ent_pers_imp == 'true'" name="checkmark-circle"></ion-icon>
-              <ion-icon danger *ngIf="report.ent_pers_imp == 'false'" name="close-circle"></ion-icon>
-            </td>
-          </tr>
-        </table>
-        </button>
-
-      <button ion-item *ngIf="report.company_name != null ">
-        <table style="width:100%">
-          <tr>
-            <td style="width:50%">Nom de l'entreprise:</td>
-            <td style="color:#666666;">{{report.company_name}}</td>
-          </tr>
-        </table>
-      </button>
-
-      <button ion-item>
-        <table style="width:100%">
-          <tr>
-            <td style="width:50%">Matériel impliqué dans cet évenement:</td>
-            <td style="color:#666666;">
-              <ion-icon large secondary *ngIf="report.material_imp == 'true'" name="checkmark-circle"></ion-icon>
-              <ion-icon danger *ngIf="report.material_imp == 'false'" name="close-circle"></ion-icon>
-            </td>
-          </tr>
-        </table>
+      <button text-wrap ion-item>
+       <ion-grid>
+        <ion-row text-wrap >
+              <ion-col class="blue" width-33>Zone:</ion-col>
+              <ion-col style="color:#666666;">{{report.zone}}</ion-col>
+        </ion-row>
+       </ion-grid>
       </button>
 
 
-      <button ion-item *ngIf="report.material != null">
-        <table style="width:100%">
-          <tr>
-            <td style="width:50%">Matériels:</td>
-            <td style="color:#666666;">{{report.material}}</td>
-          </tr>
-        </table>
+      <button text-wrap ion-item>
+       <ion-grid>
+        <ion-row text-wrap  responsive-sm >
+              <ion-col class="blue" width-33>Ent./ Pers. impliquée:</ion-col>
+              <ion-col style="color:#666666;">
+                <ion-icon large secondary *ngIf="report.ent_pers_imp == 'true'" name="checkmark-circle"></ion-icon>
+                <ion-icon danger *ngIf="report.ent_pers_imp == 'false'" name="close-circle"></ion-icon>
+              </ion-col>
+        </ion-row>
+       </ion-grid>
       </button>
 
-      <button ion-item>
-        <table style="width:100%">
-          <tr>
-            <td style="width:50%">Action immédiate:</td>
-            <td>
-              <ion-item style="color:#666666;padding-left:0;margin-top:0;" no-lines text-wrap>
-                  {{report.action}}
-              </ion-item>
-            </td>
-          </tr>
-        </table>
+      <button text-wrap ion-item *ngIf="report.company_name != null ">
+       <ion-grid>
+        <ion-row text-wrap  responsive-sm >
+              <ion-col class="blue" width-33>Nom de l'entreprise:</ion-col>
+              <ion-col style="color:#666666;">{{report.company_name}}</ion-col>
+        </ion-row>
+       </ion-grid>
       </button>
 
-      <button ion-item>
-        <table style="width:100%">
-          <tr>
-            <td style="width:50%">Proposition de solution:</td>
-            <td>
-              <ion-item style="color:#666666;padding-left:0;margin-top:0;" no-lines text-wrap>
-                  {{report.solution}}
-              </ion-item>
-            </td>
-          </tr>
-        </table>
+      <button text-wrap ion-item *ngIf="report.company_name != null ">
+       <ion-grid>
+        <ion-row text-wrap  responsive-sm>
+              <ion-col class="blue" width-33>Matériel impliqué dans cet évenement:</ion-col>
+              <ion-col style="color:#666666;">
+                <ion-icon large secondary *ngIf="report.material_imp == 'true'" name="checkmark-circle"></ion-icon>
+                <ion-icon danger *ngIf="report.material_imp == 'false'" name="close-circle"></ion-icon>
+              </ion-col>
+        </ion-row>
+       </ion-grid>
       </button>
 
 
+      <button text-wrap ion-item *ngIf="report.company_name != null ">
+       <ion-grid>
+        <ion-row text-wrap >
+              <ion-col class="blue" width-33>Matériels:</ion-col>
+              <ion-col style="color:#666666;">{{report.material}}</ion-col>
+        </ion-row>
+       </ion-grid>
+      </button>
+
+      <p text-wrap ion-item *ngIf="report.company_name != null ">
+        <ion-grid>
+          <ion-row text-wrap responsive-sm>
+            <ion-col class="blue" width-33>Action immédiate:</ion-col>
+            <ion-col style="color:#666666;" *ngIf="more.action == false">
+              {{report.action.substring(0,60)+"..."}}
+              <button clear (click)="showMore('action')"><ion-icon name="arrow-dropdown-circle"></ion-icon></button>
+            </ion-col>
+            <ion-col style="color:#666666;" *ngIf="more.action == true">
+              {{report.action}}
+              <button clear (click)="hideMore('action')"><ion-icon name="arrow-dropup-circle"></ion-icon></button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </p>
+
+      <p text-wrap ion-item *ngIf="report.company_name != null ">
+        <ion-grid>
+          <ion-row text-wrap responsive-sm>
+            <ion-col class="blue" width-33>Proposition de solution:</ion-col>
+            <ion-col style="color:#666666;" *ngIf="more.solution == false">
+              {{report.solution.substring(0,60)+"..."}}
+              <button clear (click)="showMore('solution')"><ion-icon name="arrow-dropdown-circle"></ion-icon></button>
+            </ion-col>
+            <ion-col style="color:#666666;" *ngIf="more.solution == true">
+              {{report.solution}}
+              <button clear (click)="hideMore('solution')"><ion-icon name="arrow-dropup-circle"></ion-icon></button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </p>
 
     </ion-list>
   </div>

@@ -15,6 +15,8 @@ export class ConsultReportPage {
   mySlideOptions:any;
   base64Images:any;
   step:number;
+  more:{description?: boolean, action?: boolean, solution?: boolean}={};
+
   constructor(private nav: NavController, private translate: TranslateService,private navparams:NavParams) {
     this.report=this.navparams.get("report");
     console.log(this.navparams.get("step"));
@@ -22,8 +24,17 @@ export class ConsultReportPage {
     this.mySlideOptions = {
     initialSlide: 1,
     loop: false
-  };
+  }; 
   this.base64Images=JSON.parse(this.report.image);
+  this.more.description=false;
+  this.more.action=false;
+  this.more.solution=false;
   }
+showMore(model){
+  this.more[model] = true;
+}
+hideMore(model){
+  this.more[model]=false;
 
+}
 }

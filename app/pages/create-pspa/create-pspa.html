@@ -16,14 +16,14 @@
       <div *ngIf="step==1">
         <ion-item>
           <ion-label primary>Site</ion-label>
-          <ion-input [(ngModel)]="pspa.site.label" type="text" readonly>
+          <ion-input [value]="pspa.site.label" type="text" readonly>
           </ion-input>
         </ion-item>
 
 
         <ion-item>
           <ion-label primary> Autheur</ion-label>
-          <ion-input [(ngModel)]="pspa.author.firstname+' '+pspa.author.lastname" type="text" readonly>
+          <ion-input [value]="pspa.author.firstname+' '+pspa.author.lastname" type="text" readonly>
           </ion-input>
         </ion-item>
 
